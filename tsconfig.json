@@ -20,6 +20,7 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true
   },
+  "types": ["node"],
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
