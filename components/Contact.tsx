@@ -5,45 +5,77 @@ const Contact: React.FC = () => {
   return (
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        {/* Header Section */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-brand-green mb-6">Me Contacter</h2>
           <p className="text-brand-brown/70 text-lg max-w-2xl mx-auto">
-            Besoin d'un renseignement ou d'un devis ? Louis Vésiez est à votre écoute pour vos chantiers.
+            Besoin d'un renseignement direct ? Je suis à votre écoute.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-brand-cream p-8 rounded-2xl text-center hover:bg-brand-green hover:text-brand-cream group transition-all duration-300">
-                <MapPin className="h-8 w-8 mx-auto mb-4 text-brand-green group-hover:text-brand-gold" />
-                <h3 className="font-bold text-lg mb-2">Adresse</h3>
-                <p className="opacity-80">10 Rue Wallon<br/>80600 Lucheux</p>
+          
+            <div className="bg-brand-cream p-8 rounded-2xl flex flex-col items-center text-center gap-4 transition-transform hover:-translate-y-1 h-full">
+                <div className="bg-brand-green p-4 rounded-full text-brand-cream mb-2">
+                  <MapPin className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg text-brand-green mb-2">Adresse</h3>
+                  <p className="text-brand-brown">10 Rue Wallon<br/>80600 Lucheux</p>
+                  <a 
+                    href="https://www.google.com/maps" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-block mt-3 text-sm font-bold text-brand-gold hover:underline"
+                  >
+                    Voir sur la carte
+                  </a>
+                </div>
             </div>
 
-            <div className="bg-brand-cream p-8 rounded-2xl text-center hover:bg-brand-green hover:text-brand-cream group transition-all duration-300">
-                <Phone className="h-8 w-8 mx-auto mb-4 text-brand-green group-hover:text-brand-gold" />
-                <h3 className="font-bold text-lg mb-2">Téléphone</h3>
-                <p className="opacity-80">06 XX XX XX XX</p>
+            <div className="bg-brand-cream p-8 rounded-2xl flex flex-col items-center text-center gap-4 transition-transform hover:-translate-y-1 h-full">
+                <div className="bg-brand-green p-4 rounded-full text-brand-cream mb-2">
+                  <Phone className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg text-brand-green mb-2">Téléphone</h3>
+                  <p className="text-brand-brown font-lg font-bold">06 70 82 73 34</p>
+                  <p className="text-xs text-gray-500 mt-1">Appel direct Louis Vésiez</p>
+                </div>
             </div>
 
-            <div className="bg-brand-cream p-8 rounded-2xl text-center hover:bg-brand-green hover:text-brand-cream group transition-all duration-300">
-                <Mail className="h-8 w-8 mx-auto mb-4 text-brand-green group-hover:text-brand-gold" />
-                <h3 className="font-bold text-lg mb-2">Email</h3>
-                <a href="mailto:eta-vesiez@gmail.com" className="opacity-80 hover:underline">eta-vesiez@gmail.com</a>
+            <div className="bg-brand-cream p-8 rounded-2xl flex flex-col items-center text-center gap-4 transition-transform hover:-translate-y-1 h-full">
+                <div className="bg-brand-green p-4 rounded-full text-brand-cream mb-2">
+                  <Mail className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg text-brand-green mb-2">Email</h3>
+                  <a href="mailto:eta-vesiez@gmail.com" className="text-brand-brown hover:text-brand-gold transition-colors break-all">
+                    eta-vesiez@gmail.com
+                  </a>
+                </div>
             </div>
 
-            <div className="bg-brand-cream p-8 rounded-2xl text-center hover:bg-brand-green hover:text-brand-cream group transition-all duration-300">
-                <Clock className="h-8 w-8 mx-auto mb-4 text-brand-green group-hover:text-brand-gold" />
-                <h3 className="font-bold text-lg mb-2">Disponibilité</h3>
-                <p className="opacity-80">Lun - Sam<br/>8h00 - 19h00</p>
+            <div className="bg-brand-cream p-8 rounded-2xl flex flex-col items-center text-center gap-4 transition-transform hover:-translate-y-1 h-full">
+                <div className="bg-brand-green p-4 rounded-full text-brand-cream mb-2">
+                  <Clock className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg text-brand-green mb-2">Horaires</h3>
+                  <p className="text-brand-brown">Lundi - Samedi</p>
+                  <p className="text-brand-brown font-bold">8h00 - 19h00</p>
+                </div>
             </div>
+
         </div>
 
-        <div className="mt-16 text-center">
+        <div className="text-center pt-16">
             <a 
                 href="https://www.google.com/maps" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-brand-green font-bold border-b-2 border-brand-green hover:text-brand-gold hover:border-brand-gold transition-colors pb-1"
+                className="inline-flex items-center gap-2 text-brand-green font-bold border-b-2 border-brand-green hover:text-brand-gold hover:border-brand-gold transition-colors pb-1 text-lg"
             >
                 Laisser un avis sur Google
             </a>

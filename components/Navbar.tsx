@@ -4,9 +4,10 @@ import { SectionId } from '../types';
 
 interface NavbarProps {
   scrollToSection: (id: SectionId) => void;
+  openQuoteModal: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
+const Navbar: React.FC<NavbarProps> = ({ scrollToSection, openQuoteModal }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -47,22 +48,31 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
           </div>
           
           {/* Desktop Menu */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navItems.map((item) => (
-                <button
-                  key={item.label}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-bold transition-colors ${
-                    scrolled 
-                      ? 'text-brand-brown hover:bg-brand-green hover:text-brand-cream' 
-                      : 'text-brand-cream hover:bg-brand-cream hover:text-brand-green'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
+          <div className="hidden md:flex items-center space-x-6 ml-10">
+            {navItems.map((item) => (
+              <button
+                key={item.label}
+                onClick={() => handleNavClick(item.id)}
+                className={`text-sm font-bold transition-colors ${
+                  scrolled 
+                    ? 'text-brand-brown hover:text-brand-green' 
+                    : 'text-brand-cream hover:text-brand-gold'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+            
+            <button
+              onClick={openQuoteModal}
+              className={`px-5 py-2 rounded-full text-sm font-bold transition-all ${
+                scrolled
+                  ? 'bg-brand-green text-brand-cream hover:bg-brand-gold hover:text-brand-brown'
+                  : 'bg-brand-gold text-brand-brown hover:bg-brand-cream hover:text-brand-green'
+              }`}
+            >
+              Devis
+            </button>
           </div>
           
           {/* Mobile Menu Button */}
@@ -94,6 +104,15 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
                 {item.label}
               </button>
             ))}
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                openQuoteModal();
+              }}
+              className="px-8 py-3 bg-brand-green text-brand-cream rounded-full text-xl font-bold hover:bg-brand-gold hover:text-brand-brown transition-colors"
+            >
+              Demander un Devis
+            </button>
         </div>
       )}
     </nav>

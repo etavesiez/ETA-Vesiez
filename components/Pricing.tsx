@@ -1,7 +1,12 @@
 import React from 'react';
 import { PriceItem } from '../types';
+import { FileText } from 'lucide-react';
 
-const Pricing: React.FC = () => {
+interface PricingProps {
+  openQuoteModal: () => void;
+}
+
+const Pricing: React.FC<PricingProps> = ({ openQuoteModal }) => {
   const prices: PriceItem[] = [
     { service: "Plantation Pomme de Terre", unit: "Hectare", price: "Sur Devis" },
     { service: "Arrachage Pomme de Terre", unit: "Hectare", price: "Sur Devis" },
@@ -19,7 +24,7 @@ const Pricing: React.FC = () => {
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl overflow-hidden">
+        <div className="bg-white rounded-2xl overflow-hidden shadow-sm">
           <table className="w-full text-left">
             <thead className="bg-brand-green text-brand-cream">
               <tr>
@@ -41,9 +46,13 @@ const Pricing: React.FC = () => {
         </div>
         
         <div className="mt-10 text-center">
-             <a href="#contact" className="inline-block px-8 py-3 bg-brand-gold text-brand-brown font-bold rounded-full transition-colors hover:bg-opacity-90">
-                Demander un devis
-             </a>
+             <button 
+               onClick={openQuoteModal}
+               className="inline-flex items-center gap-2 px-8 py-3 bg-brand-gold text-brand-brown font-bold rounded-full transition-colors hover:bg-opacity-90 shadow-lg"
+             >
+                <FileText className="h-5 w-5" />
+                Demander un devis en ligne
+             </button>
         </div>
       </div>
     </section>

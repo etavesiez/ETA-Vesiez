@@ -1,12 +1,13 @@
 import React from 'react';
-import { ChevronDown, ArrowRight } from 'lucide-react';
+import { ChevronDown, ArrowRight, FileText } from 'lucide-react';
 import { SectionId } from '../types';
 
 interface HeroProps {
   scrollToSection: (id: SectionId) => void;
+  openQuoteModal: () => void;
 }
 
-const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
+const Hero: React.FC<HeroProps> = ({ scrollToSection, openQuoteModal }) => {
   return (
     <div className="relative h-screen w-full overflow-hidden flex items-center justify-center">
       {/* Full screen background image */}
@@ -43,10 +44,11 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
           </button>
           
           <button 
-            onClick={() => scrollToSection(SectionId.CONTACT)}
-            className="px-10 py-4 rounded-full text-brand-cream border-2 border-brand-cream hover:bg-brand-cream hover:text-brand-green transition-all font-bold"
+            onClick={openQuoteModal}
+            className="px-10 py-4 rounded-full text-brand-cream border-2 border-brand-cream hover:bg-brand-cream hover:text-brand-green transition-all font-bold flex items-center gap-2"
           >
-            Contact
+            <FileText className="h-5 w-5" />
+            Demander un devis
           </button>
         </div>
       </div>
