@@ -1,39 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { Sprout, Truck, Hammer, Tractor, ChevronLeft, ChevronRight } from 'lucide-react';
 
+// Import automatique de toutes les images depuis public/images/**/
+const imageModules = import.meta.glob<string>('/images/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', { 
+  eager: true,
+  import: 'default'
+});
+
 const Services: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Configuration manuelle des images par catégorie
-  // Pour ajouter des images : ajoutez-les dans public/images/[categorie]/ et listez-les ici
-  const carouselImages = [
-    // Plantation
-    { src: './images/plantation/planteuse-pommes-de-terre.jpg', title: 'Planteuse Pommes De Terre', category: 'Plantation' },
-    { src: './images/plantation/semis-precision.jpg', title: 'Semis Précision', category: 'Plantation' },
-    { src: './images/plantation/semis-rangees.jpg', title: 'Semis Rangées', category: 'Plantation' },
-    
-    // Arrachage
-    { src: './images/arrachage/recolte-batteuse.jpg', title: 'Récolte Batteuse', category: 'Arrachage' },
-    { src: './images/arrachage/moisson-ete.jpg', title: 'Moisson Été', category: 'Arrachage' },
-    { src: './images/arrachage/recolte-cereales.jpg', title: 'Récolte Céréales', category: 'Arrachage' },
-    
-    // Préparation
-    { src: './images/preparation/labour-profond.jpg', title: 'Labour Profond', category: 'Préparation' },
-    { src: './images/preparation/travail-du-sol.jpg', title: 'Travail Du Sol', category: 'Préparation' },
-    { src: './images/preparation/dechaumage.jpg', title: 'Déchaumage', category: 'Préparation' },
-    { src: './images/preparation/preparation-terrain.jpg', title: 'Préparation Terrain', category: 'Préparation' },
-    { src: './images/preparation/preparation-sol-franquet.jpg', title: 'Préparation Sol Franquet', category: 'Préparation' },
-    { src: './images/preparation/compactage-sol.jpg', title: 'Compactage Sol', category: 'Préparation' },
-    { src: './images/preparation/tassage-terrain.jpg', title: 'Tassage Terrain', category: 'Préparation' },
-    
-    // Entretien
-    { src: './images/entretien/fauchage-bordures.jpg', title: 'Fauchage Bordures', category: 'Entretien' },
-    { src: './images/entretien/entretien-haies.jpg', title: 'Entretien Haies', category: 'Entretien' },
-    
-    // Fourrage
-    { src: './images/fourrage/pressage-foin.jpg', title: 'Pressage Foin', category: 'Fourrage' },
-    { src: './images/fourrage/pressage-herbe.jpg', title: 'Pressage Herbe', category: 'Fourrage' },
-  ];
+  // Générer automatiquement le carrousel depuis les dossiers
+  const carouselImages = Object.entries(imageModules)
+    .filter(([path]) => {
+      // Ignorer l'image d'accueil et le README
+      return !path.includes('image-accueil') && !path.includes('README');
+    })
+    .map(([path, url]) => {
+      // Extraire le nom du dossier (catégorie)
+      const pathParts = path.split('/');
+      const categoryFolder = pathParts[pathParts.length - 2]; // Dossier parent
+      
+      // Extraire le nom du fichier sans extension
+      const fileName = pathParts[pathParts.length - 1]
+        .replace(/\.(jpg|jpeg|png|webp)$/i, '');
+      
+      // Formater le titre : remplacer tirets par espaces et capitaliser
+      const formattedTitle = fileName
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+      
+      // Formater automatiquement le nom du dossier : tirets → espaces, capitaliser chaque mot
+      const category = categoryFolder
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+      
+      return {
+        src: url,
+        title: formattedTitle,
+        category: category
+      };
+    })
+    .sort((a, b) => {
+      // Trier par catégorie puis par titre
+      if (a.category !== b.category) {
+        return a.category.localeCompare(b.category);
+      }
+      return a.title.localeCompare(b.title);
+    });
 
   useEffect(() => {
     const timer = setInterval(() => {

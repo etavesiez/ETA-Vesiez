@@ -2,6 +2,9 @@
 
 Ce guide explique comment modifier les images du site **sans avoir besoin de coder**.
 
+**🎉 BONNE NOUVELLE : Le système est 100% AUTOMATIQUE !**
+Vous n'avez **JAMAIS** besoin de modifier le code. Ajoutez simplement vos images dans les bons dossiers.
+
 ---
 
 ## 🖼️ CHANGER L'IMAGE D'ACCUEIL
@@ -20,21 +23,26 @@ L'image d'accueil est la grande photo de fond sur la page principale.
 
 ## 🎠 GÉRER LE CARROUSEL DE PHOTOS
 
-Le carrousel affiche automatiquement toutes les photos organisées par catégories.
+Le carrousel charge **AUTOMATIQUEMENT** toutes les photos depuis les dossiers de catégories.
 
 ### 📁 Les dossiers = Les catégories
 
-Chaque dossier dans `public/images/` représente une catégorie :
+Chaque dossier dans `public/images/` devient automatiquement une catégorie :
 
 ```
 public/images/
-├── plantation/         → Photos de semis, plantation
-├── arrachage/          → Photos de récolte, batteuses
-├── preparation/        → Photos de labour, déchaumage
-├── entretien/          → Photos d'élagage, fauchage
-├── fourrage/           → Photos de pressage
-└── specialite/         → Photos spéciales
+├── plantation/         → Toutes les photos ici = catégorie "Plantation"
+├── arrachage/          → Toutes les photos ici = catégorie "Arrachage"
+├── preparation/        → Toutes les photos ici = catégorie "Préparation"
+├── entretien/          → Toutes les photos ici = catégorie "Entretien"
+├── fourrage/           → Toutes les photos ici = catégorie "Fourrage"
+└── transport/          → Toutes les photos ici = catégorie "Transport"
 ```
+
+**💡 Le système détecte automatiquement :**
+- ✅ Tous les dossiers
+- ✅ Toutes les images dans chaque dossier
+- ✅ Les titres depuis les noms de fichiers
 
 ---
 
@@ -50,26 +58,18 @@ Donnez-lui un nom descriptif avec des **tirets** entre les mots :
 - ❌ MAUVAIS : `IMG_1234.jpg`
 - ❌ MAUVAIS : `photo avec espaces.jpg`
 
-**Le nom devient le titre sur le carrousel :**
+**Le nom devient automatiquement le titre :**
 - `semis-printemps-2025.jpg` → affiche "Semis Printemps 2025"
 - `labour-automne.jpg` → affiche "Labour Automne"
 
 ### Étape 3 : Copiez la photo
-Placez votre photo dans le dossier de la catégorie choisie :
+Placez votre photo dans le dossier de la catégorie :
 ```
 public/images/plantation/semis-printemps-2025.jpg
 ```
 
-### Étape 4 : Ajoutez la photo dans le code
-Ouvrez le fichier `components/Services.tsx` et ajoutez votre ligne :
-
-```typescript
-// Trouvez la section correspondante (ex: Plantation) et ajoutez :
-{ src: './images/plantation/semis-printemps-2025.jpg', title: 'Semis Printemps 2025', category: 'Plantation' },
-```
-
-### Étape 5 : Mettez le site à jour
-Ouvrez un terminal dans le dossier du projet et tapez :
+### Étape 4 : C'EST TOUT ! 🎉
+Pas besoin de modifier le code. Compilez simplement :
 ```bash
 yarn build
 yarn deploy
@@ -79,17 +79,10 @@ yarn deploy
 
 ## 🗑️ SUPPRIMER UNE PHOTO DU CARROUSEL
 
-### Étape 1 : Supprimez le fichier
-Supprimez simplement la photo du dossier
+**Super simple :**
 
-### Étape 2 : Retirez la ligne du code
-Ouvrez `components/Services.tsx` et **supprimez** la ligne correspondante :
-```typescript
-// SUPPRIMEZ cette ligne entière :
-{ src: './images/plantation/vieille-photo.jpg', title: 'Vieille Photo', category: 'Plantation' },
-```
-
-### Étape 3 : Mettez à jour
+1. Supprimez le fichier image du dossier
+2. C'est tout ! Lancez juste :
 ```bash
 yarn build
 yarn deploy
@@ -99,23 +92,27 @@ yarn deploy
 
 ## 📂 CRÉER UNE NOUVELLE CATÉGORIE
 
+### C'est 100% AUTOMATIQUE ! 🎉
+
+**Il suffit de créer un dossier et d'y mettre des images.**
+
 ### Étape 1 : Créez le dossier
 Créez un nouveau dossier dans `public/images/`
-Exemple : `public/images/transport/`
+Exemple : `public/images/transport/` ou `public/images/travaux-speciaux/`
 
 ### Étape 2 : Ajoutez des photos
 Placez vos photos dans ce nouveau dossier avec des noms descriptifs
 
-### Étape 3 : Déclarez les photos
-Ouvrez `components/Services.tsx` et ajoutez vos photos :
-```typescript
-// Ajoutez après les autres catégories :
-// Transport
-{ src: './images/transport/camion-bennes.jpg', title: 'Camion Bennes', category: 'Transport' },
-{ src: './images/transport/manuscopique.jpg', title: 'Manuscopique', category: 'Transport' },
-```
+### Étape 3 : C'EST TOUT ! 🎉
 
-### Étape 4 : Mettez à jour
+**Le nom du dossier devient automatiquement la catégorie :**
+- `transport/` → "Transport"
+- `travaux-speciaux/` → "Travaux Speciaux"
+- `manutention/` → "Manutention"
+
+**Le système capitalise automatiquement chaque mot !**
+
+### Publiez
 ```bash
 yarn build
 yarn deploy
@@ -125,34 +122,28 @@ yarn deploy
 
 ## ✏️ RENOMMER UNE CATÉGORIE
 
-Pour changer le nom d'une catégorie (ex: "Plantation" → "Semis") :
+### Option 1 : Renommer le dossier
+Renommez simplement le dossier :
+```bash
+mv public/images/plantation public/images/semis
+```
 
-### Étape 1 : Renommez le dossier (optionnel)
-Vous pouvez garder le nom du dossier tel quel
-
-### Étape 2 : Changez le nom affiché
-Dans `components/Services.tsx`, modifiez uniquement le champ `category` :
+### Option 2 : Changer seulement l'affichage
+Dans `components/Services.tsx`, ajoutez/modifiez dans `categoryTranslations` :
 ```typescript
-// Avant :
-{ src: './images/plantation/semis.jpg', title: 'Semis', category: 'Plantation' },
-
-// Après :
-{ src: './images/plantation/semis.jpg', title: 'Semis', category: 'Semis' },
+'plantation': 'Semis et Plantation',  // Change l'affichage sans renommer le dossier
 ```
 
 ---
 
 ## ❌ SUPPRIMER UNE CATÉGORIE ENTIÈRE
 
-### Étape 1 : Supprimez le dossier
-Supprimez le dossier complet (ex: `public/images/fourrage/`)
-
-### Étape 2 : Retirez toutes les lignes
-Dans `components/Services.tsx`, supprimez **toutes** les lignes de cette catégorie :
-```typescript
-// SUPPRIMEZ TOUTES ces lignes :
-{ src: './images/fourrage/pressage-foin.jpg', title: 'Pressage Foin', category: 'Fourrage' },
-{ src: './images/fourrage/pressage-herbe.jpg', title: 'Pressage Herbe', category: 'Fourrage' },
+1. Supprimez le dossier complet : `public/images/fourrage/`
+2. C'est tout ! Le système ne chargera plus ces images
+3. Publiez :
+```bash
+yarn build
+yarn deploy
 ```
 
 ---
@@ -178,12 +169,13 @@ yarn deploy
 ✅ **À FAIRE :**
 - Nommer les fichiers avec des tirets : `mon-image-2025.jpg`
 - Utiliser des formats : `.jpg`, `.jpeg`, `.png`, `.webp`
+- Mettre les images dans les bons dossiers de catégories
 - Toujours lancer `yarn build` puis `yarn deploy` après une modification
 
 ❌ **À ÉVITER :**
 - Espaces dans les noms : `ma photo.jpg`
 - Accents dans les noms de fichiers : `récolte.jpg` → utilisez `recolte.jpg`
-- Oublier de mettre à jour le fichier `Services.tsx`
+- Mettre des images directement dans `public/images/` (utilisez les sous-dossiers)
 
 ---
 
@@ -191,7 +183,23 @@ yarn deploy
 
 Si le site ne s'affiche pas correctement :
 
-1. Vérifiez que tous les noms de fichiers sont corrects
-2. Vérifiez qu'il n'y a pas d'erreurs dans `components/Services.tsx` (virgules, guillemets, etc.)
+1. Vérifiez que tous les noms de fichiers sont corrects (pas d'espaces, pas d'accents)
+2. Vérifiez que les images sont dans des sous-dossiers (pas à la racine de `images/`)
 3. Relancez `yarn build` pour voir les erreurs
-4. Si tout est bloqué, restaurez la version précédente avec Git
+4. Videz le cache de votre navigateur (Ctrl+Shift+R ou Cmd+Shift+R)
+
+---
+
+## 🎯 RÉSUMÉ - CE QUE VOUS DEVEZ SAVOIR
+
+**Pour ajouter une image :**
+1. Nommez-la avec des tirets : `ma-photo.jpg`
+2. Mettez-la dans le bon dossier : `public/images/[categorie]/ma-photo.jpg`
+3. Publiez : `yarn build && yarn deploy`
+
+**Pour créer une catégorie :**
+1. Créez un dossier : `public/images/nouvelle-categorie/`
+2. Ajoutez des images dedans
+3. Publiez : `yarn build && yarn deploy`
+
+**Tout est automatique ! Aucun code à modifier !** 🎉
