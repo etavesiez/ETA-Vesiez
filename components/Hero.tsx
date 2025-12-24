@@ -14,7 +14,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection, openQuoteModal }) => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url("/images/image-accueil.jpg")',
+          backgroundImage: 'url("./images/image-accueil.jpg")',
         }}
       >
         {/* Simple uniform overlay for text readability */}

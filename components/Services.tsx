@@ -8,31 +8,31 @@ const Services: React.FC = () => {
   // Pour ajouter des images : ajoutez-les dans public/images/[categorie]/ et listez-les ici
   const carouselImages = [
     // Plantation
-    { src: '/images/plantation/planteuse-pommes-de-terre.jpg', title: 'Planteuse Pommes De Terre', category: 'Plantation' },
-    { src: '/images/plantation/semis-precision.jpg', title: 'Semis Précision', category: 'Plantation' },
-    { src: '/images/plantation/semis-rangees.jpg', title: 'Semis Rangées', category: 'Plantation' },
+    { src: './images/plantation/planteuse-pommes-de-terre.jpg', title: 'Planteuse Pommes De Terre', category: 'Plantation' },
+    { src: './images/plantation/semis-precision.jpg', title: 'Semis Précision', category: 'Plantation' },
+    { src: './images/plantation/semis-rangees.jpg', title: 'Semis Rangées', category: 'Plantation' },
     
     // Arrachage
-    { src: '/images/arrachage/recolte-batteuse.jpg', title: 'Récolte Batteuse', category: 'Arrachage' },
-    { src: '/images/arrachage/moisson-ete.jpg', title: 'Moisson Été', category: 'Arrachage' },
-    { src: '/images/arrachage/recolte-cereales.jpg', title: 'Récolte Céréales', category: 'Arrachage' },
+    { src: './images/arrachage/recolte-batteuse.jpg', title: 'Récolte Batteuse', category: 'Arrachage' },
+    { src: './images/arrachage/moisson-ete.jpg', title: 'Moisson Été', category: 'Arrachage' },
+    { src: './images/arrachage/recolte-cereales.jpg', title: 'Récolte Céréales', category: 'Arrachage' },
     
     // Préparation
-    { src: '/images/preparation/labour-profond.jpg', title: 'Labour Profond', category: 'Préparation' },
-    { src: '/images/preparation/travail-du-sol.jpg', title: 'Travail Du Sol', category: 'Préparation' },
-    { src: '/images/preparation/dechaumage.jpg', title: 'Déchaumage', category: 'Préparation' },
-    { src: '/images/preparation/preparation-terrain.jpg', title: 'Préparation Terrain', category: 'Préparation' },
-    { src: '/images/preparation/preparation-sol-franquet.jpg', title: 'Préparation Sol Franquet', category: 'Préparation' },
-    { src: '/images/preparation/compactage-sol.jpg', title: 'Compactage Sol', category: 'Préparation' },
-    { src: '/images/preparation/tassage-terrain.jpg', title: 'Tassage Terrain', category: 'Préparation' },
+    { src: './images/preparation/labour-profond.jpg', title: 'Labour Profond', category: 'Préparation' },
+    { src: './images/preparation/travail-du-sol.jpg', title: 'Travail Du Sol', category: 'Préparation' },
+    { src: './images/preparation/dechaumage.jpg', title: 'Déchaumage', category: 'Préparation' },
+    { src: './images/preparation/preparation-terrain.jpg', title: 'Préparation Terrain', category: 'Préparation' },
+    { src: './images/preparation/preparation-sol-franquet.jpg', title: 'Préparation Sol Franquet', category: 'Préparation' },
+    { src: './images/preparation/compactage-sol.jpg', title: 'Compactage Sol', category: 'Préparation' },
+    { src: './images/preparation/tassage-terrain.jpg', title: 'Tassage Terrain', category: 'Préparation' },
     
     // Entretien
-    { src: '/images/entretien/fauchage-bordures.jpg', title: 'Fauchage Bordures', category: 'Entretien' },
-    { src: '/images/entretien/entretien-haies.jpg', title: 'Entretien Haies', category: 'Entretien' },
+    { src: './images/entretien/fauchage-bordures.jpg', title: 'Fauchage Bordures', category: 'Entretien' },
+    { src: './images/entretien/entretien-haies.jpg', title: 'Entretien Haies', category: 'Entretien' },
     
     // Fourrage
-    { src: '/images/fourrage/pressage-foin.jpg', title: 'Pressage Foin', category: 'Fourrage' },
-    { src: '/images/fourrage/pressage-herbe.jpg', title: 'Pressage Herbe', category: 'Fourrage' },
+    { src: './images/fourrage/pressage-foin.jpg', title: 'Pressage Foin', category: 'Fourrage' },
+    { src: './images/fourrage/pressage-herbe.jpg', title: 'Pressage Herbe', category: 'Fourrage' },
   ];
 
   useEffect(() => {

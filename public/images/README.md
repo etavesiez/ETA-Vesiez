@@ -65,7 +65,7 @@ Ouvrez le fichier `components/Services.tsx` et ajoutez votre ligne :
 
 ```typescript
 // Trouvez la section correspondante (ex: Plantation) et ajoutez :
-{ src: '/images/plantation/semis-printemps-2025.jpg', title: 'Semis Printemps 2025', category: 'Plantation' },
+{ src: './images/plantation/semis-printemps-2025.jpg', title: 'Semis Printemps 2025', category: 'Plantation' },
 ```
 
 ### Étape 5 : Mettez le site à jour
@@ -86,7 +86,7 @@ Supprimez simplement la photo du dossier
 Ouvrez `components/Services.tsx` et **supprimez** la ligne correspondante :
 ```typescript
 // SUPPRIMEZ cette ligne entière :
-{ src: '/images/plantation/vieille-photo.jpg', title: 'Vieille Photo', category: 'Plantation' },
+{ src: './images/plantation/vieille-photo.jpg', title: 'Vieille Photo', category: 'Plantation' },
 ```
 
 ### Étape 3 : Mettez à jour
@@ -111,8 +111,8 @@ Ouvrez `components/Services.tsx` et ajoutez vos photos :
 ```typescript
 // Ajoutez après les autres catégories :
 // Transport
-{ src: '/images/transport/camion-bennes.jpg', title: 'Camion Bennes', category: 'Transport' },
-{ src: '/images/transport/manuscopique.jpg', title: 'Manuscopique', category: 'Transport' },
+{ src: './images/transport/camion-bennes.jpg', title: 'Camion Bennes', category: 'Transport' },
+{ src: './images/transport/manuscopique.jpg', title: 'Manuscopique', category: 'Transport' },
 ```
 
 ### Étape 4 : Mettez à jour
@@ -134,10 +134,10 @@ Vous pouvez garder le nom du dossier tel quel
 Dans `components/Services.tsx`, modifiez uniquement le champ `category` :
 ```typescript
 // Avant :
-{ src: '/images/plantation/semis.jpg', title: 'Semis', category: 'Plantation' },
+{ src: './images/plantation/semis.jpg', title: 'Semis', category: 'Plantation' },
 
 // Après :
-{ src: '/images/plantation/semis.jpg', title: 'Semis', category: 'Semis' },
+{ src: './images/plantation/semis.jpg', title: 'Semis', category: 'Semis' },
 ```
 
 ---
@@ -151,8 +151,8 @@ Supprimez le dossier complet (ex: `public/images/fourrage/`)
 Dans `components/Services.tsx`, supprimez **toutes** les lignes de cette catégorie :
 ```typescript
 // SUPPRIMEZ TOUTES ces lignes :
-{ src: '/images/fourrage/pressage-foin.jpg', title: 'Pressage Foin', category: 'Fourrage' },
-{ src: '/images/fourrage/pressage-herbe.jpg', title: 'Pressage Herbe', category: 'Fourrage' },
+{ src: './images/fourrage/pressage-foin.jpg', title: 'Pressage Foin', category: 'Fourrage' },
+{ src: './images/fourrage/pressage-herbe.jpg', title: 'Pressage Herbe', category: 'Fourrage' },
 ```
 
 ---
