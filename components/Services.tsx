@@ -1,28 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { Sprout, Truck, Hammer, Tractor, ChevronLeft, ChevronRight } from 'lucide-react';
 
+// Chargement automatique de toutes les images par catégorie
+const imageModules = import.meta.glob('/images/**/*.{jpg,jpeg,png,webp}', { eager: true, query: '?url', import: 'default' });
+
 const Services: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const carouselImages = [
-    { src: '/images/SEMIS.jpg', title: 'Semis de précision', category: 'Plantation' },
-    { src: '/images/SEMIS 2.jpg', title: 'Semis', category: 'Plantation' },
-    { src: '/images/pdt.jpg', title: 'Culture de pommes de terre', category: 'Spécialité' },
-    { src: '/images/BATTEUSE.jpg', title: 'Récolte batteuse', category: 'Arrachage' },
-    { src: '/images/BATTEUSE 2.jpg', title: 'Moisson', category: 'Arrachage' },
-    { src: '/images/BATTEUSE 3.jpg', title: 'Récolte', category: 'Arrachage' },
-    { src: '/images/LABOUR.jpg', title: 'Labour', category: 'Préparation' },
-    { src: '/images/LABOUR 2.jpg', title: 'Travail du sol', category: 'Préparation' },
-    { src: '/images/preparation sol franquet.jpg', title: 'Préparation sol', category: 'Préparation' },
-    { src: '/images/preparation sol  franquet 2.jpg', title: 'Préparation terrain', category: 'Préparation' },
-    { src: '/images/DECHAUMEUR.jpg', title: 'Déchaumage', category: 'Préparation' },
-    { src: '/images/TASSAGE.jpg', title: 'Tassage', category: 'Travaux' },
-    { src: '/images/TASSAGE 2.jpg', title: 'Compactage', category: 'Travaux' },
-    { src: '/images/EPAREUSE.jpg', title: 'Épareuse', category: 'Entretien' },
-    { src: '/images/EPAREUSE 2.jpg', title: 'Fauchage', category: 'Entretien' },
-    { src: '/images/pressage.jpg', title: 'Pressage', category: 'Fourrage' },
-    { src: '/images/pressage herbe.jpg', title: 'Pressage herbe', category: 'Fourrage' },
-  ];
+  // Générer automatiquement la liste des images depuis les dossiers
+  const carouselImages = Object.entries(imageModules).map(([path, url]) => {
+    // Extraire le nom de la catégorie depuis le chemin
+    const match = path.match(/images\/([^/]+)\//);
+    const categoryFolder = match ? match[1] : 'Autre';
+    
+    // Capitaliser et traduire les noms de catégorie
+    const categoryNames: Record<string, string> = {
+      'plantation': 'Plantation',
+      'arrachage': 'Arrachage',
+      'preparation': 'Préparation',
+      'entretien': 'Entretien',
+      'fourrage': 'Fourrage',
+      'specialite': 'Spécialité'
+    };
+    
+    // Extraire le nom du fichier sans extension et le formater joliment
+    const fileName = path.split('/').pop()?.replace(/\.(jpg|jpeg|png|webp)$/i, '') || '';
+    // Convertir les tirets en espaces et capitaliser chaque mot
+    const formattedTitle = fileName
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+    
+    return {
+      src: url as string,
+      title: formattedTitle,
+      category: categoryNames[categoryFolder] || categoryFolder
+    };
+  });
 
   useEffect(() => {
     const timer = setInterval(() => {
