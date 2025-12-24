@@ -1,7 +1,44 @@
-import React from 'react';
-import { Sprout, Truck, Hammer, Tractor } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Sprout, Truck, Hammer, Tractor, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Services: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const carouselImages = [
+    { src: '/images/SEMIS.jpg', title: 'Semis de précision', category: 'Plantation' },
+    { src: '/images/SEMIS 2.jpg', title: 'Semis', category: 'Plantation' },
+    { src: '/images/pdt.jpg', title: 'Culture de pommes de terre', category: 'Spécialité' },
+    { src: '/images/BATTEUSE.jpg', title: 'Récolte batteuse', category: 'Arrachage' },
+    { src: '/images/BATTEUSE 2.jpg', title: 'Moisson', category: 'Arrachage' },
+    { src: '/images/BATTEUSE 3.jpg', title: 'Récolte', category: 'Arrachage' },
+    { src: '/images/LABOUR.jpg', title: 'Labour', category: 'Préparation' },
+    { src: '/images/LABOUR 2.jpg', title: 'Travail du sol', category: 'Préparation' },
+    { src: '/images/preparation sol franquet.jpg', title: 'Préparation sol', category: 'Préparation' },
+    { src: '/images/preparation sol  franquet 2.jpg', title: 'Préparation terrain', category: 'Préparation' },
+    { src: '/images/DECHAUMEUR.jpg', title: 'Déchaumage', category: 'Préparation' },
+    { src: '/images/TASSAGE.jpg', title: 'Tassage', category: 'Travaux' },
+    { src: '/images/TASSAGE 2.jpg', title: 'Compactage', category: 'Travaux' },
+    { src: '/images/EPAREUSE.jpg', title: 'Épareuse', category: 'Entretien' },
+    { src: '/images/EPAREUSE 2.jpg', title: 'Fauchage', category: 'Entretien' },
+    { src: '/images/pressage.jpg', title: 'Pressage', category: 'Fourrage' },
+    { src: '/images/pressage herbe.jpg', title: 'Pressage herbe', category: 'Fourrage' },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [carouselImages.length]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
+
   const services = [
     {
       title: "Plantation",
@@ -31,6 +68,65 @@ const Services: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-serif font-bold text-brand-green mb-4">Mes Prestations</h2>
           <div className="h-1 w-20 bg-brand-gold mx-auto rounded-full"></div>
+        </div>
+
+        {/* Carrousel de photos */}
+        <div className="relative mb-20 rounded-3xl overflow-hidden shadow-2xl max-w-5xl mx-auto">
+          <div className="relative h-[500px]">
+            {carouselImages.map((image, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 transition-opacity duration-1000 ${
+                  index === currentSlide ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <img
+                  src={image.src}
+                  alt={image.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                  <span className="inline-block px-3 py-1 bg-brand-gold text-brand-brown rounded-full text-sm font-semibold mb-2">
+                    {image.category}
+                  </span>
+                  <h3 className="text-3xl font-bold">{image.title}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation buttons */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-brand-green p-3 rounded-full shadow-lg transition-all z-10"
+            aria-label="Image précédente"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-brand-green p-3 rounded-full shadow-lg transition-all z-10"
+            aria-label="Image suivante"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
+
+          {/* Indicateurs */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {carouselImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`h-2 rounded-full transition-all ${
+                  index === currentSlide
+                    ? 'w-8 bg-brand-gold'
+                    : 'w-2 bg-white/60 hover:bg-white/80'
+                }`}
+                aria-label={`Aller à l'image ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
