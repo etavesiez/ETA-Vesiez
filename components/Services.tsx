@@ -3,7 +3,7 @@ import { Sprout, Truck, Hammer, Tractor, ChevronLeft, ChevronRight } from 'lucid
 
 // Import automatique de toutes les images depuis public/images/**/
 // Utiliser le chemin absolu depuis la racine du projet
-const imageModules = import.meta.glob<{ default: string }>('../public/images/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', { 
+const imageModules = import.meta.glob<{ default: string }>('../public/images/carrousel/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
   eager: true
 });
 
@@ -12,10 +12,6 @@ const Services: React.FC = () => {
 
   // Générer automatiquement le carrousel depuis les dossiers
   const carouselImages = Object.entries(imageModules)
-    .filter(([path]) => {
-      // Ignorer l'image d'accueil et le README
-      return !path.includes('image-accueil') && !path.includes('README');
-    })
     .map(([path, module]) => {
       const url = module.default;
       
