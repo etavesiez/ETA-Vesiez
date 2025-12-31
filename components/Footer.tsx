@@ -6,11 +6,12 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex  items-center md:items-start">
           <img
-            src="/images/logo/carre_light.png"
+            src="./images/logo/carre_light.png"
             alt="Logo ETA Vesiez"
             className="h-12 w-auto mb-2"
             style={{ maxWidth: 160 }}
-          /> </div>
+          />
+        </div>
         <div className="flex gap-8 text-sm opacity-80">
           <a href="#" className="hover:text-white transition-colors">Mentions Légales</a>
           <a href="#" className="hover:text-white transition-colors">Contact</a>
