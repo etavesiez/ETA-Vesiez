@@ -42,10 +42,10 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, openQuoteModal }) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center cursor-pointer gap-3" onClick={() => handleNavClick(SectionId.HOME)}>
             <img
-              src={scrolled ? "/images/logo/bandeau_light.png" : "/images/logo/bandeau_couleur.png"}
+              src={scrolled ? "/images/logo/bandeau_couleur.png" : "/images/logo/bandeau_light.png"}
               alt="Logo ETA Vesiez"
-              className="h-10 w-auto transition-all duration-300"
-              style={{ maxWidth: 180 }}
+              className="h-12 w-auto transition-all duration-300"
+              style={{ maxWidth: 220 }}
             />
           </div>
           

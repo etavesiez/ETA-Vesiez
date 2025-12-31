@@ -6,11 +6,7 @@ const About: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="w-full lg:w-1/2 flex flex-col items-center gap-6">
-            <img
-              src="/images/logo/carre_light.png"
-              alt="Logo carré ETA Vesiez"
-              className="rounded-2xl w-48 h-48 object-contain border border-brand-cream bg-white shadow"
-            />
+     
             <img 
               src="./images/plantation/planteuse-pommes-de-terre.jpg" 
               alt="Planteuse de pommes de terre" 
