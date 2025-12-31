@@ -26,9 +26,11 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection, openQuoteModal }) => {
           Fondée en 2025
         </div>
         
-        <h1 className="text-5xl md:text-7xl lg:text-9xl font-serif font-bold text-brand-cream mb-6 tracking-tight">
-          ETA VESIEZ
-        </h1>
+        <img
+          src="/images/logo/bandeau blanc.png"
+          alt="Logo ETA Vesiez"
+          className="mx-auto mb-6 max-w-[600px] w-full drop-shadow-lg"
+        />
         
         <p className="text-xl md:text-2xl text-brand-cream/90 font-light mb-12 max-w-2xl mx-auto leading-relaxed">
           Travaux agricoles et spécialiste de la pomme de terre à <span className="text-brand-gold font-medium">Lucheux</span>.

@@ -5,11 +5,16 @@ const About: React.FC = () => {
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-16">
-          <div className="w-full lg:w-1/2">
+          <div className="w-full lg:w-1/2 flex flex-col items-center gap-6">
+            <img
+              src="/images/logo/carre light.png"
+              alt="Logo carré ETA Vesiez"
+              className="rounded-2xl w-48 h-48 object-contain border border-brand-cream bg-white shadow"
+            />
             <img 
-              src="https://images.unsplash.com/photo-1527847263472-aa5338d178b8?q=80&w=2944&auto=format&fit=crop" 
-              alt="Champs de pommes de terre" 
-              className="rounded-2xl w-full object-cover h-[500px]"
+              src="./images/plantation/planteuse-pommes-de-terre.jpg" 
+              alt="Planteuse de pommes de terre" 
+              className="rounded-2xl w-full object-cover h-[320px]"
             />
           </div>
           

@@ -41,10 +41,12 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, openQuoteModal }) => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="flex items-center cursor-pointer gap-3" onClick={() => handleNavClick(SectionId.HOME)}>
-             <Tractor className={`h-8 w-8 ${scrolled ? 'text-brand-green' : 'text-brand-gold'}`} />
-             <span className={`font-serif font-bold text-xl tracking-wide ${scrolled ? 'text-brand-green' : 'text-brand-cream'}`}>
-                ETA VESIEZ
-              </span>
+            <img
+              src={scrolled ? "/images/logo/bandeau light.png" : "/images/logo/bandeau couleur .png"}
+              alt="Logo ETA Vesiez"
+              className="h-10 w-auto transition-all duration-300"
+              style={{ maxWidth: 180 }}
+            />
           </div>
           
           {/* Desktop Menu */}
