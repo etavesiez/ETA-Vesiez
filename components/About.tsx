@@ -8,7 +8,7 @@ const About: React.FC = () => {
           <div className="w-full lg:w-1/2 flex flex-col items-center gap-6">
      
             <img 
-              src="./images/plantation/planteuse-pommes-de-terre.jpg" 
+              src="./images/carrousel/plantation/planteuse-pommes-de-terre.jpg" 
               alt="Planteuse de pommes de terre" 
               className="rounded-2xl w-full object-cover h-[320px]"
             />
