@@ -33,7 +33,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection, openQuoteModal }) => {
         />
         
         <p className="text-xl md:text-2xl text-brand-cream/90 font-light mb-12 max-w-2xl mx-auto leading-relaxed">
-          Travaux agricoles et spécialiste de la pomme de terre à <span className="text-brand-gold font-medium">Lucheux</span>.
+          Prestation de service dans les haut de France
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

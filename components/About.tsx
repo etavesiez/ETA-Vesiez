@@ -25,7 +25,7 @@ const About: React.FC = () => {
                 <strong>ETA Vesiez</strong> est une Entreprise Individuelle (EI) fondée en décembre 2025. Je dirige seul cette structure pour offrir un service direct et sans intermédiaire.
               </p>
               <p>
-                Passionné par le machinisme et la culture de la pomme de terre, <strong>je me déplace personnellement</strong> sur vos exploitations à <span className="text-brand-green font-bold">Lucheux</span> et ses alentours. En faisant appel à moi, vous avez la garantie que c'est le patron qui effectue le travail, avec soin et rigueur.
+                Passionné par le machinisme et la culture de la pomme de terre, <strong>je me déplace sur le secteur des Hauts-de-France</strong> afin de vous offrir un travail avec soin et rigueur.
               </p>
             </div>
 

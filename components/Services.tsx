@@ -70,23 +70,48 @@ const Services: React.FC = () => {
 
   const services = [
     {
-      title: "Plantation",
-      desc: "Préparation du sol et semis de précision réalisés par mes soins pour un rendement optimal.",
+      title: "Plantation de pommes de terre",
+      desc: "Plantation mécanisée et précise des pommes de terre pour un démarrage optimal.",
       icon: Sprout
     },
     {
-      title: "Arrachage",
-      desc: "Récolte soignée de vos pommes de terre avec mon propre matériel performant.",
+      title: "Arrachage de pommes de terre",
+      desc: "Arrachage, tri et préparation à la livraison de vos pommes de terre.",
       icon: Tractor
     },
     {
-      title: "Location Manuscopic",
-      desc: "Je viens effectuer vos travaux de manutention avec mon manuscopique (prestation avec chauffeur).",
+      title: "Moisson",
+      desc: "Moisson rapide et soignée de vos céréales avec matériel adapté.",
+      icon: Tractor
+    },
+    {
+      title: "Semis en ligne",
+      desc: "Semis de précision en ligne pour une répartition homogène des cultures.",
+      icon: Sprout
+    },
+    {
+      title: "Débroussaillage",
+      desc: "Entretien et nettoyage mécanique des parcelles (débroussaillage).",
       icon: Hammer
     },
     {
-      title: "Transport & Bennes",
-      desc: "Location de bennes agricoles et TP pour le transport de vos récoltes.",
+      title: "Travail du sol",
+      desc: "Labour, hersage et préparation des parcelles avant semis.",
+      icon: Tractor
+    },
+    {
+      title: "Préparation du sol",
+      desc: "Préparations fines du lit de semence pour assurer une bonne levée.",
+      icon: Sprout
+    },
+    {
+      title: "Tassage de silo",
+      desc: "Tassage et compactage de silo pour optimiser le stockage et la conservation.",
+      icon: Hammer
+    },
+    {
+      title: "Pressage de balles rondes",
+      desc: "Pressage et mise en balles rondes pour stockage et transport.",
       icon: Truck
     }
   ];
@@ -95,7 +120,7 @@ const Services: React.FC = () => {
     <section className="py-24 bg-brand-cream">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-serif font-bold text-brand-green mb-4">Mes Prestations</h2>
+          <h2 className="text-4xl font-serif font-bold text-brand-green mb-4">Les Prestations</h2>
           <div className="h-1 w-20 bg-brand-gold mx-auto rounded-full"></div>
         </div>
 
