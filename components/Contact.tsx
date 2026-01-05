@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { SocialIcon } from 'react-social-icons';
 
 const Contact: React.FC = () => {
   return (
@@ -24,7 +25,7 @@ const Contact: React.FC = () => {
                   <h3 className="font-bold text-lg text-brand-green mb-2">Adresse</h3>
                   <p className="text-brand-brown">10 Rue Wallon<br/>80600 Lucheux</p>
                   <a 
-                    href="https://www.google.com/maps" 
+                    href="https://www.google.com/maps/search/?api=1&query=10+Rue+Wallon+80600+Lucheux" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="inline-block mt-3 text-sm font-bold text-brand-gold hover:underline"
@@ -40,8 +41,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg text-brand-green mb-2">Téléphone</h3>
-                  <p className="text-brand-brown font-lg font-bold">06 70 82 73 34</p>
-                  <p className="text-xs text-gray-500 mt-1">Appel direct Louis Vésiez</p>
+                  <p className="text-brand-brown font-lg font-bold">+33 7 69 65 14 30</p>
                 </div>
             </div>
 
@@ -79,6 +79,42 @@ const Contact: React.FC = () => {
             >
                 Laisser un avis sur Google
             </a>
+        </div>
+
+        <div className="text-center pt-8">
+          <h3 className="text-lg font-bold text-brand-green mb-4">Réseaux sociaux</h3>
+          <div className="flex items-center justify-center gap-4">
+            <SocialIcon
+              url="https://www.instagram.com/eta_vesiez"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ height: 36, width: 36 }}
+              className="hover:opacity-80"
+              aria-label="Instagram"
+            />
+
+            <SocialIcon
+              url="https://www.facebook.com/eta.vesiez"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ height: 36, width: 36 }}
+              className="hover:opacity-80"
+              aria-label="Facebook"
+            />
+
+            <SocialIcon
+              url="https://www.tiktok.com/@eta_vesiez"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ height: 36, width: 36 }}
+              className="hover:opacity-80"
+              aria-label="TikTok"
+            />
+
+            <span className="inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm text-gray-500 bg-white/50">
+              🔜 Page Google (bientôt)
+            </span>
+          </div>
         </div>
       </div>
     </section>
