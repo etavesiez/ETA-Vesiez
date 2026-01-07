@@ -2,6 +2,7 @@ import React from 'react';
 import { SocialIcon } from 'react-social-icons';
 import footerData from '../public/texte/footer.json';
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
+import { Scrollbar } from 'react-scrollbars-custom';
 import mentionsData from '../public/texte/mentions-legales.json';
 
 const Footer: React.FC = () => {
@@ -90,21 +91,21 @@ const Footer: React.FC = () => {
                 {footerData.mentions}
               </button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="w-full max-w-3xl max-h-[100vh]">
               <DialogHeader>
                 <DialogTitle className="text-brand-green text-3xl mb-6 text-center tracking-tight font-block">{mentionsData.mentions_label}</DialogTitle>
               </DialogHeader>
-              <div className="prose prose-lg max-w-none text-brand-brown leading-relaxed space-y-6 max-h-[70vh] overflow-y-auto px-2">
-                {mentionsData.contenu.map((item: { titre?: string, texte: string }, idx: number) => {
-                  if (item.titre === 'Adresse :') {
-                    return (
-                      <p key={idx} className="first:mt-0 last:mb-0 text-justify">
-                        <span className="font-bold text-brand-green">{item.titre} </span>
-                        <a href="https://www.google.com/maps/search/?api=1&query=10+Rue+Wallon+80600+Lucheux" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-gold">{item.texte}</a>
-                      </p>
-                    );
-                  }
-                    // Hébergeur cliquable
+              <Scrollbar style={{ maxHeight: '100vh', minHeight: 350 }} className="px-1">
+                <div className="prose prose-lg max-w-none text-brand-brown leading-relaxed space-y-6">
+                  {mentionsData.contenu.map((item: { titre?: string, texte: string }, idx: number) => {
+                    if (item.titre === 'Adresse :') {
+                      return (
+                        <p key={idx} className="first:mt-0 last:mb-0 text-justify">
+                          <span className="font-bold text-brand-green">{item.titre} </span>
+                          <a href="https://www.google.com/maps/search/?api=1&query=10+Rue+Wallon+80600+Lucheux" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-gold">{item.texte}</a>
+                        </p>
+                      );
+                    }
                     if (item.titre === 'Hébergeur :') {
                       return (
                         <p key={idx} className="first:mt-0 last:mb-0 text-justify">
@@ -113,30 +114,31 @@ const Footer: React.FC = () => {
                         </p>
                       );
                     }
-                  if (item.titre === 'Téléphone :') {
+                    if (item.titre === 'Téléphone :') {
+                      return (
+                        <p key={idx} className="first:mt-0 last:mb-0 text-justify">
+                          <span className="font-bold text-brand-green">{item.titre} </span>
+                          <a href="tel:+33769651430" className="underline hover:text-brand-gold">{item.texte}</a>
+                        </p>
+                      );
+                    }
+                    if (item.titre === 'Email :') {
+                      return (
+                        <p key={idx} className="first:mt-0 last:mb-0 text-justify">
+                          <span className="font-bold text-brand-green">{item.titre} </span>
+                          <a href="mailto:eta-vesiez@gmail.com" className="underline hover:text-brand-gold">{item.texte}</a>
+                        </p>
+                      );
+                    }
                     return (
                       <p key={idx} className="first:mt-0 last:mb-0 text-justify">
-                        <span className="font-bold text-brand-green">{item.titre} </span>
-                        <a href="tel:+33769651430" className="underline hover:text-brand-gold">{item.texte}</a>
+                        {item.titre && <span className="font-bold text-brand-green">{item.titre} </span>}
+                        <span>{item.texte}</span>
                       </p>
                     );
-                  }
-                  if (item.titre === 'Email :') {
-                    return (
-                      <p key={idx} className="first:mt-0 last:mb-0 text-justify">
-                        <span className="font-bold text-brand-green">{item.titre} </span>
-                        <a href="mailto:eta-vesiez@gmail.com" className="underline hover:text-brand-gold">{item.texte}</a>
-                      </p>
-                    );
-                  }
-                  return (
-                    <p key={idx} className="first:mt-0 last:mb-0 text-justify">
-                      {item.titre && <span className="font-bold text-brand-green">{item.titre} </span>}
-                      <span>{item.texte}</span>
-                    </p>
-                  );
-                })}
-              </div>
+                  })}
+                </div>
+              </Scrollbar>
             </DialogContent>
           </Dialog>
         </div>
