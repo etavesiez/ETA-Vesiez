@@ -15,36 +15,67 @@ const Footer: React.FC = () => {
         <div className="flex flex-col items-center mb-6">
           <span className="uppercase tracking-widest text-brand-gold font-block text-lg mb-2">Réseaux sociaux</span>
           <div className="flex flex-row items-center gap-6 font-sans">
-            <SocialIcon
-              url={footerData.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ height: 44, width: 44 }}
-              fgColor="#fff"
-              bgColor="transparent"
-              className="hover:scale-110 hover:opacity-90 transition-transform duration-200"
-              aria-label="Instagram"
-            />
-            <SocialIcon
-              url={footerData.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ height: 44, width: 44 }}
-              fgColor="#fff"
-              bgColor="transparent"
-              className="hover:scale-110 hover:opacity-90 transition-transform duration-200"
-              aria-label="Facebook"
-            />
-            <SocialIcon
-              url={footerData.tiktok}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ height: 44, width: 44 }}
-              fgColor="#fff"
-              bgColor="transparent"
-              className="hover:scale-110 hover:opacity-90 transition-transform duration-200"
-              aria-label="TikTok"
-            />
+            {footerData.instagram && (
+              <SocialIcon
+                url={footerData.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ height: 44, width: 44 }}
+                fgColor="#fff"
+                bgColor="transparent"
+                className="hover:scale-110 hover:opacity-90 transition-transform duration-200"
+                aria-label="Instagram"
+              />
+            )}
+            {footerData.facebook && (
+              <SocialIcon
+                url={footerData.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ height: 44, width: 44 }}
+                fgColor="#fff"
+                bgColor="transparent"
+                className="hover:scale-110 hover:opacity-90 transition-transform duration-200"
+                aria-label="Facebook"
+              />
+            )}
+            {footerData.tiktok && (
+              <SocialIcon
+                url={footerData.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ height: 44, width: 44 }}
+                fgColor="#fff"
+                bgColor="transparent"
+                className="hover:scale-110 hover:opacity-90 transition-transform duration-200"
+                aria-label="TikTok"
+              />
+            )}
+            {footerData.linkedin && (
+              <SocialIcon
+                url={footerData.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ height: 44, width: 44 }}
+                fgColor="#fff"
+                bgColor="transparent"
+                className="hover:scale-110 hover:opacity-90 transition-transform duration-200"
+                aria-label="LinkedIn"
+              />
+            )}
+            {footerData.whatsapp && (
+              <SocialIcon
+                url={footerData.whatsapp}
+                network="whatsapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ height: 44, width: 44 }}
+                fgColor="#fff"
+                bgColor="transparent"
+                className="hover:scale-110 hover:opacity-90 transition-transform duration-200"
+                aria-label="WhatsApp"
+              />
+            )}
           </div>
         </div>
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-10 mb-2">
