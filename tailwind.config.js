@@ -33,5 +33,16 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addBase, theme }) {
+      addBase({
+        ':root': {
+          '--color-brand-brown': theme('colors.brand.brown'),
+          '--color-brand-gold': theme('colors.brand.gold'),
+          '--color-brand-green': theme('colors.brand.green'),
+          '--color-brand-cream': theme('colors.brand.cream'),
+        }
+      });
+    }
+  ],
 }

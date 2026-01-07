@@ -141,11 +141,11 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
         </button>
 
         {fields.length > 0 ? (
-          <div style={{ maxHeight: '90vh', width: '100%', borderRadius: '1rem', minHeight: 0, overflowY: 'auto' }} className="flex-1">
+          <div style={{ maxWidth: '100%', borderRadius: '1rem' }}>
             <Scrollbar
               style={{
                 maxHeight: '90vh',
-                minHeight: window.innerWidth < 640 ? 600 : window.innerWidth < 768 ? 800 : 1000
+                minHeight: window.innerWidth < 640 ? 600 : window.innerWidth < 768 ? 700 : 800
               }}
               trackYProps={{ style: { background: 'transparent', width: 10, right: 0 } }}
               thumbYProps={{
