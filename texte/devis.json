@@ -28,9 +28,9 @@
       {
         "label": "Plantation de pommes de terre 90cm",
         "sousOptions": [
-          "Tracteur + benne",
-          "Télescopique",
-          "Tracteur + herse rotative"
+          { "label": "Tracteur + benne", "type": "supplément" },
+          { "label": "Télescopique", "type": "supplément" },
+          { "label": "Tracteur + herse rotative", "type": "supplément" }
         ]
       },
       "Arrachage",
