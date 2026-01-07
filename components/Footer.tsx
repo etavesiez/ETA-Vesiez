@@ -5,10 +5,11 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from 
 import { X } from 'lucide-react';
 import { Scrollbar } from 'react-scrollbars-custom';
 import './FooterScrollbar.css';
-import mentionsData from '../public/texte/mentions-legales.json';
-import MentionsLegales from './MentionsLegales';
+interface FooterProps {
+  openMentionsModal: () => void;
+}
 
-const Footer: React.FC = () => {
+const Footer: React.FC<FooterProps> = ({ openMentionsModal }) => {
   return (
     <footer className="bg-brand-green text-brand-cream pt-10 pb-6">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col items-center">
@@ -84,7 +85,13 @@ const Footer: React.FC = () => {
             )}
           </div>
         </div>
-        <MentionsLegales/>
+        <button
+          className="hover:text-white transition-colors text-sm opacity-80 underline focus:outline-none focus:ring-2 focus:ring-brand-gold rounded mb-4"
+          type="button"
+          onClick={openMentionsModal}
+        >
+          {footerData.mentions}
+        </button>
         
         <div className="text-xs opacity-50 text-center">
           {footerData.texte}

@@ -9,8 +9,12 @@ import Footer from './components/Footer';
 import QuoteForm from './components/QuoteForm';
 import { SectionId } from './types';
 
+
+import MentionsLegales from './components/MentionsLegales';
+
 function App() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [isMentionsOpen, setIsMentionsOpen] = useState(false);
 
   const scrollToSection = (id: SectionId) => {
     const element = document.getElementById(id);
@@ -21,6 +25,8 @@ function App() {
 
   const openQuoteModal = () => setIsQuoteModalOpen(true);
   const closeQuoteModal = () => setIsQuoteModalOpen(false);
+  const openMentionsModal = () => setIsMentionsOpen(true);
+  const closeMentionsModal = () => setIsMentionsOpen(false);
 
   return (
     <div className="min-h-screen flex flex-col font-sans">
@@ -54,10 +60,12 @@ function App() {
         </section>
       </main>
 
-      <Footer />
+      <Footer openMentionsModal={openMentionsModal} />
 
       {/* Global Quote Modal */}
       <QuoteForm isOpen={isQuoteModalOpen} onClose={closeQuoteModal} />
+      {/* Global Mentions Modal */}
+      <MentionsLegales isOpen={isMentionsOpen} onClose={closeMentionsModal} />
     </div>
   );
 }
