@@ -8,8 +8,8 @@ const About: React.FC = () => {
           <div className="w-full lg:w-1/2 flex flex-col items-center gap-6">
      
             <img 
-              src="./images/carrousel/plantation/planteuse-pommes-de-terre.jpg" 
-              alt="Planteuse de pommes de terre" 
+              src="./images/a-propos.jpeg" 
+              alt="A propos" 
               className="rounded-2xl w-full object-cover h-[320px]"
             />
           </div>
