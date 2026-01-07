@@ -111,12 +111,12 @@ const Footer: React.FC = () => {
                     style={{ maxHeight: '100vh', minHeight: 350 }}
                     trackYProps={{ style: { background: 'transparent', width: 10, right: 0 } }}
                     thumbYProps={{
-                      style: { background: '#5B4636', borderRadius: 6, width: 8, minHeight: 40, transition: 'background 0.2s' },
+                      style: { background: '#4D3529', borderRadius: 6, width: 8, minHeight: 40, transition: 'background 0.2s' },
                       className: 'custom-scrollbar-thumb',
                     }}
                     trackXProps={{ style: { display: 'none' } }}
                   >
-                    <div className="prose prose-lg max-w-none text-brand-brown leading-relaxed space-y-6 pr-6">
+                    <div className="prose prose-lg max-w-none text-brand-brown leading-relaxed space-y-6 pr-3">
                   {mentionsData.contenu.map((item: { titre?: string, texte: string }, idx: number) => {
                     if (item.titre === 'Adresse :') {
                       return (

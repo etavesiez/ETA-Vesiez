@@ -1,6 +1,6 @@
 /* Personnalisation du thumb de la scrollbar Mentions légales */
 .custom-scrollbar-thumb {
-  background: #2E4A31 !important;
+  background: #4D3529 !important;
   transition: background 0.2s;
 }
 .custom-scrollbar-thumb:hover,
