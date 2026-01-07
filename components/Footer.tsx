@@ -6,6 +6,7 @@ import { X } from 'lucide-react';
 import { Scrollbar } from 'react-scrollbars-custom';
 import './FooterScrollbar.css';
 import mentionsData from '../public/texte/mentions-legales.json';
+import MentionsLegales from './MentionsLegales';
 
 const Footer: React.FC = () => {
   return (
@@ -83,85 +84,8 @@ const Footer: React.FC = () => {
             )}
           </div>
         </div>
-        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-10">
-          <Dialog>
-            <DialogTrigger asChild>
-              <button
-                className="hover:text-white transition-colors text-sm opacity-80 underline focus:outline-none focus:ring-2 focus:ring-brand-gold rounded"
-                type="button"
-              >
-                {footerData.mentions}
-              </button>
-            </DialogTrigger>
-                <DialogContent className="w-full max-w-3xl max-h-[100vh]">
-                  {/* Bouton de fermeture explicite */}
-                  <button
-                    onClick={() => document.activeElement && (document.activeElement as HTMLElement).blur()}
-                    className="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-brand-gold hover:text-brand-brown transition-colors z-10"
-                    aria-label="Fermer"
-                    tabIndex={0}
-                    type="button"
-                  >
-                    <X className="h-6 w-6" />
-                  </button>
-              <DialogHeader>
-                <DialogTitle className="text-brand-green text-3xl mb-6 text-center tracking-tight font-block">{mentionsData.mentions_label}</DialogTitle>
-              </DialogHeader>
-                  <Scrollbar
-                    style={{ maxHeight: '100vh', minHeight: 350 }}
-                    trackYProps={{ style: { background: 'transparent', width: 10, right: 0 } }}
-                    thumbYProps={{
-                      style: { background: '#4D3529', borderRadius: 6, width: 8, minHeight: 40, transition: 'background 0.2s' },
-                      className: 'custom-scrollbar-thumb',
-                    }}
-                    trackXProps={{ style: { display: 'none' } }}
-                  >
-                    <div className="prose prose-lg max-w-none text-brand-brown leading-relaxed space-y-6 pr-3">
-                  {mentionsData.contenu.map((item: { titre?: string, texte: string }, idx: number) => {
-                    if (item.titre === 'Adresse :') {
-                      return (
-                        <p key={idx} className="first:mt-0 last:mb-0 text-justify">
-                          <span className="font-bold text-brand-green">{item.titre} </span>
-                          <a href="https://www.google.com/maps/search/?api=1&query=10+Rue+Wallon+80600+Lucheux" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-gold">{item.texte}</a>
-                        </p>
-                      );
-                    }
-                    if (item.titre === 'Hébergeur :') {
-                      return (
-                        <p key={idx} className="first:mt-0 last:mb-0 text-justify">
-                          <span className="font-bold text-brand-green">{item.titre} </span>
-                          <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-gold">GitHub Pages</a>
-                        </p>
-                      );
-                    }
-                    if (item.titre === 'Téléphone :') {
-                      return (
-                        <p key={idx} className="first:mt-0 last:mb-0 text-justify">
-                          <span className="font-bold text-brand-green">{item.titre} </span>
-                          <a href="tel:+33769651430" className="underline hover:text-brand-gold">{item.texte}</a>
-                        </p>
-                      );
-                    }
-                    if (item.titre === 'Email :') {
-                      return (
-                        <p key={idx} className="first:mt-0 last:mb-0 text-justify">
-                          <span className="font-bold text-brand-green">{item.titre} </span>
-                          <a href="mailto:eta-vesiez@gmail.com" className="underline hover:text-brand-gold">{item.texte}</a>
-                        </p>
-                      );
-                    }
-                    return (
-                      <p key={idx} className="first:mt-0 last:mb-0 text-justify">
-                        {item.titre && <span className="font-bold text-brand-green">{item.titre} </span>}
-                        <span>{item.texte}</span>
-                      </p>
-                    );
-                  })}
-                </div>
-              </Scrollbar>
-            </DialogContent>
-          </Dialog>
-        </div>
+        <MentionsLegales/>
+        
         <div className="text-xs opacity-50 text-center">
           {footerData.texte}
         </div>
