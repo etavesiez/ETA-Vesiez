@@ -4,7 +4,8 @@ import { SocialIcon } from 'react-social-icons';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import menuData from '../public/texte/menu.json';
 import contactData from '../public/texte/contact.json';
-// import { SocialIcon } from 'react-social-icons';
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
+import mentionsData from '../public/texte/mentions-legales.json';
 
 const Contact: React.FC = () => {
 

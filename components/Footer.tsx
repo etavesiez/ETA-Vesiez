@@ -92,12 +92,50 @@ const Footer: React.FC = () => {
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle className="text-brand-green text-2xl mb-4 text-center">{mentionsData.mentions_label}</DialogTitle>
+                <DialogTitle className="text-brand-green text-3xl mb-6 text-center tracking-tight font-block">{mentionsData.mentions_label}</DialogTitle>
               </DialogHeader>
-              <div className="space-y-4 text-brand-brown text-base max-h-[60vh] overflow-y-auto px-1">
-                {mentionsData.contenu.map((paragraphe: string, idx: number) => (
-                  <p key={idx}>{paragraphe}</p>
-                ))}
+              <div className="prose prose-lg max-w-none text-brand-brown leading-relaxed space-y-6 max-h-[70vh] overflow-y-auto px-2">
+                {mentionsData.contenu.map((item: { titre?: string, texte: string }, idx: number) => {
+                  if (item.titre === 'Adresse :') {
+                    return (
+                      <p key={idx} className="first:mt-0 last:mb-0 text-justify">
+                        <span className="font-bold text-brand-green">{item.titre} </span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=10+Rue+Wallon+80600+Lucheux" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-gold">{item.texte}</a>
+                      </p>
+                    );
+                  }
+                    // Hébergeur cliquable
+                    if (item.titre === 'Hébergeur :') {
+                      return (
+                        <p key={idx} className="first:mt-0 last:mb-0 text-justify">
+                          <span className="font-bold text-brand-green">{item.titre} </span>
+                          <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-gold">GitHub Pages</a>
+                        </p>
+                      );
+                    }
+                  if (item.titre === 'Téléphone :') {
+                    return (
+                      <p key={idx} className="first:mt-0 last:mb-0 text-justify">
+                        <span className="font-bold text-brand-green">{item.titre} </span>
+                        <a href="tel:+33769651430" className="underline hover:text-brand-gold">{item.texte}</a>
+                      </p>
+                    );
+                  }
+                  if (item.titre === 'Email :') {
+                    return (
+                      <p key={idx} className="first:mt-0 last:mb-0 text-justify">
+                        <span className="font-bold text-brand-green">{item.titre} </span>
+                        <a href="mailto:eta-vesiez@gmail.com" className="underline hover:text-brand-gold">{item.texte}</a>
+                      </p>
+                    );
+                  }
+                  return (
+                    <p key={idx} className="first:mt-0 last:mb-0 text-justify">
+                      {item.titre && <span className="font-bold text-brand-green">{item.titre} </span>}
+                      <span>{item.texte}</span>
+                    </p>
+                  );
+                })}
               </div>
             </DialogContent>
           </Dialog>
