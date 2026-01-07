@@ -3,6 +3,11 @@ import React from 'react';
 const About: React.FC = () => {
   return (
     <section className="py-24 bg-white">
+       <div className="text-center mb-16">
+        <h2 className="text-4xl font-block font-bold text-brand-green mb-4">À Propos</h2>
+        <div className="h-1 w-20 bg-brand-gold mx-auto rounded-full"></div>
+       </div>
+      
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="w-full lg:w-1/2 flex flex-col items-center gap-6">
@@ -15,10 +20,10 @@ const About: React.FC = () => {
           </div>
           
           <div className="w-full lg:w-1/2">
+                    
             <h4 className="text-brand-gold font-block uppercase tracking-widest text-sm mb-2">L'Entrepreneur</h4>
-            <h2 className="text-4xl md:text-5xl font-block font-bold text-brand-green mb-8">
-              Un service de proximité par Louis Vésiez
-            </h2>
+            
+            <div className="text-brand-brown/70 text-lg mb-8">Un service de proximité par Louis Vésiez</div>
             
             <div className="space-y-6 text-brand-brown text-lg leading-relaxed">
               <p>

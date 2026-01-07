@@ -33,10 +33,11 @@ const HorairesMessage: React.FC = () => {
         
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-block font-bold text-brand-green mb-6">Me Contacter</h2>
-          <p className="text-brand-brown/70 text-lg max-w-2xl mx-auto font-sans">
+          <h2 className="text-4xl font-block font-bold text-brand-green mb-4">Contact</h2>
+          <div className="h-1 w-20 bg-brand-gold mx-auto rounded-full"></div>
+          <div className="text-brand-brown/70 text-lg mb-4 max-w-2xl mx-auto font-sans mt-4">
             Besoin d'un renseignement direct ? Je suis à votre écoute.
-          </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -106,18 +107,18 @@ const HorairesMessage: React.FC = () => {
               href="https://www.google.com/maps" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-brand-brown font-bold border-b-2 border-brand-brown hover:text-brand-gold hover:border-brand-gold transition-colors pb-1 text-lg group"
+              className="inline-flex items-center gap-3 text-brand-brown font-bold text-lg group hover:text-brand-gold transition-colors"
             >
               <SocialIcon
                 url="https://www.google.com/maps"
                 network="google"
-                style={{ height: 28, width: 28 }}
+                style={{ height: 40, width: 40 }}
                 fgColor="currentColor"
                 bgColor="transparent"
                 className="inline-block align-middle "
                 aria-label="Google"
               />
-              Laisser un avis sur Google
+              <span className="align-middle">Laisser un avis sur Google</span>
             </a>
         </div>
 
