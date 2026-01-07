@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+// import { Scrollbar } from 'react-scrollbars-custom';
 import { Send, CheckCircle, X } from 'lucide-react';
 
 interface QuoteFormProps {
@@ -27,6 +28,7 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
   const [fields, setFields] = useState<any[]>([]);
   const [formData, setFormData] = useState<any>({});
 
+  const [contactEmail, setContactEmail] = useState<string>('');
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}texte/devis.json`)
       .then(res => res.json())
@@ -39,6 +41,11 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
           else initial[f.champ] = '';
         });
         setFormData(initial);
+      });
+    fetch(`${import.meta.env.BASE_URL}texte/contact.json`)
+      .then(res => res.json())
+      .then((data) => {
+        setContactEmail(data.email || '');
       });
   }, []);
 
@@ -63,8 +70,58 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would send data to a backend
-    console.log("Form submitted:", { ...formData, preferredContact: contactMethod });
+    // Envoi via Formsubmit.co
+    const form = document.createElement('form');
+    form.action = contactEmail ? `https://formsubmit.co/${contactEmail}` : '';
+    form.method = 'POST';
+    form.style.display = 'none';
+
+    // Ajoute tous les champs dynamiquement
+    (Object.entries({ ...formData, preferredContact: contactMethod }) as [string, unknown][]).forEach(([key, value]) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      if (Array.isArray(value)) {
+        input.value = value.join(', ');
+      } else {
+        input.value = value !== undefined && value !== null ? String(value) : '';
+      }
+      form.appendChild(input);
+    });
+
+    // Ajoute _replyto si le champ email existe dans le formulaire
+    if (formData.email) {
+      const replyto = document.createElement('input');
+      replyto.type = 'hidden';
+      replyto.name = '_replyto';
+      replyto.value = formData.email;
+      form.appendChild(replyto);
+    }
+
+    // Ajoute _subject
+    const subject = document.createElement('input');
+    subject.type = 'hidden';
+    subject.name = '_subject';
+    subject.value = 'Nouvelle demande de devis ETA Vesiez';
+    form.appendChild(subject);
+
+    // Désactive le captcha
+    const captcha = document.createElement('input');
+    captcha.type = 'hidden';
+    captcha.name = '_captcha';
+    captcha.value = 'false';
+    form.appendChild(captcha);
+
+    // Redirection après soumission (reste sur la page)
+    const next = document.createElement('input');
+    next.type = 'hidden';
+    next.name = '_next';
+    next.value = window.location.href;
+    form.appendChild(next);
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
     setSubmitted(true);
   };
 
@@ -82,6 +139,14 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
+  // DEBUG: log et contenu des fields
+  console.log('QuoteForm rendu, isOpen:', isOpen, 'fields:', fields.length, fields);
+  if (fields.length > 0) {
+    fields.forEach((f, i) => {
+      console.log(`Field[${i}]`, f);
+    });
+  }
+
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
       {/* Backdrop */}
@@ -90,9 +155,8 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
         onClick={onClose}
       ></div>
 
-      {/* Modal Content */}
-      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in duration-200">
-        
+      {/* Modal Content with custom Scrollbar */}
+      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] animate-in fade-in zoom-in duration-200 flex flex-col">
         {/* Close Button */}
         <button 
           onClick={onClose}
@@ -101,153 +165,160 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
           <X className="h-6 w-6" />
         </button>
 
-        <div className="p-8">
-          {submitted ? (
-            <div className="text-center py-10">
-              <div className="w-20 h-20 bg-brand-green rounded-full flex items-center justify-center mx-auto mb-6">
-                <CheckCircle className="h-10 w-10 text-brand-cream" />
-              </div>
-              <h3 className="text-2xl font-block font-bold text-brand-green mb-4">Demande envoyée !</h3>
-              <p className="text-brand-brown mb-8">
-                Merci M/Mme {formData.name}. Louis Vésiez a bien reçu votre demande de devis.<br/>
-                Il vous recontactera très prochainement par {contactMethod === 'email' ? 'email' : 'téléphone'}.
-              </p>
-              <div className="flex justify-center gap-4">
-                <button 
-                  onClick={onClose}
-                  className="px-6 py-2 border-2 border-brand-green text-brand-green font-bold rounded-full hover:bg-brand-green hover:text-brand-cream transition-colors"
-                >
-                  Fermer
-                </button>
-                <button 
-                  onClick={resetForm}
-                  className="px-6 py-2 bg-brand-gold text-brand-brown font-bold rounded-full hover:bg-opacity-90 transition-colors"
-                >
-                  Nouvelle demande
-                </button>
-              </div>
-            </div>
-          ) : (
-            <>
-              <h3 className="text-2xl font-block font-bold text-brand-green mb-2 pr-10">Demander un devis</h3>
-              <p className="text-brand-brown/70 mb-8">
-                Sélectionnez vos prestations et expliquez votre besoin. Je vous réponds rapidement.
-              </p>
+        {fields.length > 0 ? (
+          <div style={{ maxHeight: '90vh', width: '100%', borderRadius: '1rem', minHeight: 0, overflowY: 'auto' }} className="flex-1">
+            <div className="p-8">
+              {submitted ? (
+                <div className="text-center py-10">
+                  <div className="w-20 h-20 bg-brand-green rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle className="h-10 w-10 text-brand-cream" />
+                  </div>
+                  <h3 className="text-2xl font-block font-bold text-brand-green mb-4">Demande envoyée !</h3>
+                  <p className="text-brand-brown mb-8">
+                    Merci M/Mme {formData.name}. Louis Vésiez a bien reçu votre demande de devis.<br/>
+                    Il vous recontactera très prochainement par {contactMethod === 'email' ? 'email' : 'téléphone'}.
+                  </p>
+                  <div className="flex justify-center gap-4">
+                    <button 
+                      onClick={onClose}
+                      className="px-6 py-2 border-2 border-brand-green text-brand-green font-bold rounded-full hover:bg-brand-green hover:text-brand-cream transition-colors"
+                    >
+                      Fermer
+                    </button>
+                    <button 
+                      onClick={resetForm}
+                      className="px-6 py-2 bg-brand-gold text-brand-brown font-bold rounded-full hover:bg-opacity-90 transition-colors"
+                    >
+                      Nouvelle demande
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <h3 className="text-2xl font-block font-bold text-brand-green mb-2 pr-10">Demander un devis</h3>
+                  <p className="text-brand-brown/70 mb-8">
+                    Sélectionnez vos prestations et expliquez votre besoin. Je vous réponds rapidement.
+                  </p>
 
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {fields.map((field) => {
-                  if (field.type === 'select') {
-                    // Multi-select (checkboxes)
-                    return (
-                      <div key={field.champ}>
-                        <label className="block text-sm font-block font-bold text-brand-green mb-3 uppercase tracking-wide">
-                          {field.label}
-                        </label>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          {field.options.map((option: string) => (
-                            <label key={option} className="flex items-center space-x-3 cursor-pointer group">
-                              <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors flex-shrink-0 ${
-                                (formData[field.champ] || []).includes(option) ? 'bg-brand-green border-brand-green' : 'border-gray-300 bg-white group-hover:border-brand-gold'
-                              }`}>
-                                {(formData[field.champ] || []).includes(option) && <CheckCircle className="h-3 w-3 text-white" />}
+                  <form onSubmit={handleSubmit} className="space-y-6" autoComplete="off">
+                    {fields.map((field) => {
+                      if (field.type === 'select') {
+                        // Multi-select (checkboxes)
+                        return (
+                          <div key={field.champ}>
+                            <label className="block text-sm font-block font-bold text-brand-green mb-3 uppercase tracking-wide">
+                              {field.label}
+                            </label>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                              {field.options.map((option: string) => (
+                                <label key={option} className="flex items-center space-x-3 cursor-pointer group">
+                                  <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors flex-shrink-0 ${
+                                    (formData[field.champ] || []).includes(option) ? 'bg-brand-green border-brand-green' : 'border-gray-300 bg-white group-hover:border-brand-gold'
+                                  }`}>
+                                    {(formData[field.champ] || []).includes(option) && <CheckCircle className="h-3 w-3 text-white" />}
+                                  </div>
+                                  <input
+                                    type="checkbox"
+                                    className="hidden"
+                                    checked={(formData[field.champ] || []).includes(option)}
+                                    onChange={() => handleSelectChange(field.champ, option)}
+                                  />
+                                  <span className={`text-sm ${(formData[field.champ] || []).includes(option) ? 'text-brand-green font-medium' : 'text-brand-brown'}`}>
+                                    {option}
+                                  </span>
+                                </label>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      }
+                      if (field.type === 'textarea') {
+                        return (
+                          <div key={field.champ}>
+                            <label htmlFor={field.champ} className="block text-sm font-bold text-brand-green mb-2 uppercase tracking-wide">
+                              {field.label}
+                            </label>
+                            <textarea
+                              id={field.champ}
+                              rows={3}
+                              required={!!field.obligatoire}
+                              placeholder={field.placeholder}
+                              className="w-full px-4 py-3 rounded-lg bg-brand-cream/30 border border-brand-cream focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-colors"
+                              value={formData[field.champ] || ''}
+                              onChange={(e) => handleInputChange(field.champ, e.target.value)}
+                            />
+                          </div>
+                        );
+                      }
+                      if (field.type === 'email' || field.type === 'tel' || field.type === 'text') {
+                        // Pour email/tel, on propose le choix du mode de contact si champ email ou tel
+                        if (field.type === 'email' || field.type === 'tel') {
+                          return (
+                            <div key={field.champ}>
+                              <div className="flex items-center gap-2 mb-2">
+                                <input
+                                  type="radio"
+                                  name="contactMethod"
+                                  checked={contactMethod === field.type.replace('email', 'email').replace('tel', 'phone')}
+                                  onChange={() => setContactMethod(field.type === 'email' ? 'email' : 'phone')}
+                                  className="accent-brand-gold"
+                                />
+                                <span className="text-xs text-brand-brown font-medium cursor-pointer">
+                                  {field.type === 'email' ? 'Par Email' : 'Par Téléphone'}
+                                </span>
                               </div>
                               <input
-                                type="checkbox"
-                                className="hidden"
-                                checked={(formData[field.champ] || []).includes(option)}
-                                onChange={() => handleSelectChange(field.champ, option)}
+                                type={field.type}
+                                required={contactMethod === (field.type === 'email' ? 'email' : 'phone') && !!field.obligatoire}
+                                placeholder={field.placeholder}
+                                className={`w-full px-4 py-3 rounded-lg border focus:ring-1 outline-none transition-colors ${
+                                  contactMethod === (field.type === 'email' ? 'email' : 'phone')
+                                    ? 'border-brand-green bg-white ring-brand-green'
+                                    : 'border-gray-200 bg-gray-50'
+                                }`}
+                                value={formData[field.champ] || ''}
+                                onChange={(e) => handleInputChange(field.champ, e.target.value)}
                               />
-                              <span className={`text-sm ${(formData[field.champ] || []).includes(option) ? 'text-brand-green font-medium' : 'text-brand-brown'}`}>
-                                {option}
-                              </span>
+                            </div>
+                          );
+                        }
+                        // Champ text classique
+                        return (
+                          <div key={field.champ}>
+                            <label htmlFor={field.champ} className="block text-sm font-bold text-brand-green mb-2 uppercase tracking-wide">
+                              {field.label}
                             </label>
-                          ))}
-                        </div>
-                      </div>
-                    );
-                  }
-                  if (field.type === 'textarea') {
-                    return (
-                      <div key={field.champ}>
-                        <label htmlFor={field.champ} className="block text-sm font-bold text-brand-green mb-2 uppercase tracking-wide">
-                          {field.label}
-                        </label>
-                        <textarea
-                          id={field.champ}
-                          rows={3}
-                          required={!!field.obligatoire}
-                          placeholder={field.placeholder}
-                          className="w-full px-4 py-3 rounded-lg bg-brand-cream/30 border border-brand-cream focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-colors"
-                          value={formData[field.champ] || ''}
-                          onChange={(e) => handleInputChange(field.champ, e.target.value)}
-                        />
-                      </div>
-                    );
-                  }
-                  if (field.type === 'email' || field.type === 'tel' || field.type === 'text') {
-                    // Pour email/tel, on propose le choix du mode de contact si champ email ou tel
-                    if (field.type === 'email' || field.type === 'tel') {
-                      return (
-                        <div key={field.champ}>
-                          <div className="flex items-center gap-2 mb-2">
                             <input
-                              type="radio"
-                              name="contactMethod"
-                              checked={contactMethod === field.type.replace('email', 'email').replace('tel', 'phone')}
-                              onChange={() => setContactMethod(field.type === 'email' ? 'email' : 'phone')}
-                              className="accent-brand-gold"
+                              type={field.type}
+                              required={!!field.obligatoire}
+                              placeholder={field.placeholder}
+                              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none"
+                              value={formData[field.champ] || ''}
+                              onChange={(e) => handleInputChange(field.champ, e.target.value)}
                             />
-                            <span className="text-xs text-brand-brown font-medium cursor-pointer">
-                              {field.type === 'email' ? 'Par Email' : 'Par Téléphone'}
-                            </span>
                           </div>
-                          <input
-                            type={field.type}
-                            required={contactMethod === (field.type === 'email' ? 'email' : 'phone') && !!field.obligatoire}
-                            placeholder={field.placeholder}
-                            className={`w-full px-4 py-3 rounded-lg border focus:ring-1 outline-none transition-colors ${
-                              contactMethod === (field.type === 'email' ? 'email' : 'phone')
-                                ? 'border-brand-green bg-white ring-brand-green'
-                                : 'border-gray-200 bg-gray-50'
-                            }`}
-                            value={formData[field.champ] || ''}
-                            onChange={(e) => handleInputChange(field.champ, e.target.value)}
-                          />
-                        </div>
-                      );
-                    }
-                    // Champ text classique
-                    return (
-                      <div key={field.champ}>
-                        <label htmlFor={field.champ} className="block text-sm font-bold text-brand-green mb-2 uppercase tracking-wide">
-                          {field.label}
-                        </label>
-                        <input
-                          type={field.type}
-                          required={!!field.obligatoire}
-                          placeholder={field.placeholder}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none"
-                          value={formData[field.champ] || ''}
-                          onChange={(e) => handleInputChange(field.champ, e.target.value)}
-                        />
-                      </div>
-                    );
-                  }
-                  return null;
-                })}
+                        );
+                      }
+                      return null;
+                    })}
 
-                <button
-                  type="submit"
-                  className="w-full py-3 bg-brand-gold text-brand-brown font-bold rounded-full hover:bg-opacity-90 transition-transform hover:scale-[1.01] flex items-center justify-center gap-2 text-base shadow-sm"
-                >
-                  <Send className="h-5 w-5" />
-                  Envoyer la demande
-                </button>
-              </form>
-            </>
-          )}
-        </div>
+                    <button
+                      type="submit"
+                      className="w-full py-3 bg-brand-gold text-brand-brown font-bold rounded-full hover:bg-opacity-90 transition-transform hover:scale-[1.01] flex items-center justify-center gap-2 text-base shadow-sm"
+                    >
+                      <Send className="h-5 w-5" />
+                      Envoyer la demande
+                    </button>
+                  </form>
+                </>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="flex-1 flex items-center justify-center p-8">
+            <span className="text-brand-brown/60">Chargement du formulaire…</span>
+          </div>
+        )}
       </div>
     </div>
   );
