@@ -217,8 +217,11 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                                               <span className={`text-sm ${mainChecked ? 'text-brand-green font-semibold' : 'text-brand-brown'}`}>{option.label}</span>
                                             </label>
                                             <div className="ml-6 flex flex-col gap-1">
-                                              {option.sousOptions.map((sous: string) => {
-                                                const sousKey = `${option.label} - ${sous}`;
+                                              {option.sousOptions.map((sous: any) => {
+                                                // Supporte string ou objet {label, type}
+                                                const sousLabel = typeof sous === 'string' ? sous : sous.label;
+                                                const sousType = typeof sous === 'object' && sous.type ? sous.type : undefined;
+                                                const sousKey = `${option.label} - ${sousLabel}`;
                                                 const sousChecked = (formData[field.champ] || []).includes(sousKey);
                                                 return (
                                                   <label key={sousKey} className={`flex items-center space-x-3 cursor-pointer group ${!mainChecked ? 'opacity-50 pointer-events-none' : ''} py-1`}>
@@ -229,7 +232,15 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                                                       disabled={!mainChecked}
                                                       onChange={() => handleSelectChange(field.champ, sousKey)}
                                                     />
-                                                    <span className={`text-xs ${sousChecked ? 'text-brand-green font-semibold' : 'text-brand-brown'}`}>{sous}</span>
+                                                    <span className={`text-xs ${sousChecked ? 'text-brand-green font-semibold' : 'text-brand-brown'}`}>
+                                                      {sousLabel}
+                                                      {sousType === 'supplément' && (
+                                                        <span className="ml-1 text-brand-gold font-semibold">(supplément)</span>
+                                                      )}
+                                                      {sousType === 'choix' && (
+                                                        <span className="ml-1 text-brand-green/60">(choix)</span>
+                                                      )}
+                                                    </span>
                                                   </label>
                                                 );
                                               })}
