@@ -145,7 +145,7 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
             <Scrollbar
               style={{
                 maxHeight: '90vh',
-                minHeight: window.innerWidth < 640 ? 200 : window.innerWidth < 768 ? 400 : window.innerWidth < 1024 ? 600 : 800
+                minHeight: window.innerWidth < 640 ? 600 : window.innerWidth < 768 ? 800 : 1000
               }}
               trackYProps={{ style: { background: 'transparent', width: 10, right: 0 } }}
               thumbYProps={{

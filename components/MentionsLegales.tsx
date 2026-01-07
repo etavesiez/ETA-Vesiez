@@ -45,7 +45,7 @@ const MentionsLegales: React.FC<MentionsLegalesProps> = ({ isOpen, onClose }) =>
         <Scrollbar
           style={{
             maxHeight: '100vh',
-            minHeight: typeof window !== 'undefined' && window.innerWidth < 640 ? 200 : typeof window !== 'undefined' && window.innerWidth < 768 ? 400 : typeof window !== 'undefined' && window.innerWidth < 1024 ? 600 : 800
+            minHeight: typeof window !== 'undefined' && window.innerWidth < 640 ? 600 : typeof window !== 'undefined' && window.innerWidth < 768 ? 800 : 1000
           }}
           trackYProps={{ style: { background: 'transparent', width: 10, right: 0 } }}
           thumbYProps={{
