@@ -26,7 +26,7 @@ const MentionsLegales: React.FC<MentionsLegalesProps> = ({ isOpen, onClose }) =>
 
   if (!isOpen) return null;
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p7-4 sm:p-8">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8">
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-brand-green/60 backdrop-blur-sm transition-opacity"
@@ -34,7 +34,7 @@ const MentionsLegales: React.FC<MentionsLegalesProps> = ({ isOpen, onClose }) =>
       ></div>
 
       {/* Modal Content */}
-      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl min-h-[60vh]  overflow-y-auto animate-in fade-in zoom-in duration-200">
+      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl min-h-[60vh] overflow-y-auto animate-in fade-in zoom-in duration-200 pl-4 sm:pl-4 pr-2 sm:pr-2">
         {/* Close Button */}
         <button 
           onClick={onClose}
@@ -52,7 +52,7 @@ const MentionsLegales: React.FC<MentionsLegalesProps> = ({ isOpen, onClose }) =>
             trackXProps={{ style: { display: 'none' } }}
           >
 
-        <div className="p-6 sm:p-5">
+        <div className="p-2 sm:p-4 md:p-6 lg:p-8">
           <h3 className="text-2xl sm:text-3xl font-block font-bold text-brand-green mb-4 sm:mb-6 text-center tracking-tight">{mentionsData.mentions_label}</h3>
           
             <div className="prose prose-base sm:prose-lg max-w-none text-brand-brown leading-relaxed space-y-4 sm:space-y-6 pr-1 sm:pr-3">
