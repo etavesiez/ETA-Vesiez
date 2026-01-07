@@ -95,8 +95,8 @@ const Footer: React.FC = () => {
               <DialogHeader>
                 <DialogTitle className="text-brand-green text-3xl mb-6 text-center tracking-tight font-block">{mentionsData.mentions_label}</DialogTitle>
               </DialogHeader>
-              <Scrollbar style={{ maxHeight: '100vh', minHeight: 350 }} className="px-1">
-                <div className="prose prose-lg max-w-none text-brand-brown leading-relaxed space-y-6">
+                  <Scrollbar style={{ maxHeight: '100vh', minHeight: 350 }}>
+                    <div className="prose prose-lg max-w-none text-brand-brown leading-relaxed space-y-6 pl-6">
                   {mentionsData.contenu.map((item: { titre?: string, texte: string }, idx: number) => {
                     if (item.titre === 'Adresse :') {
                       return (
