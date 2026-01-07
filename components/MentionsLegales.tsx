@@ -38,7 +38,7 @@ const MentionsLegales: React.FC<MentionsLegalesProps> = ({ isOpen, onClose }) =>
         {/* Close Button */}
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-brand-gold hover:text-brand-brown transition-colors z-10"
+          className="absolute top-4 right-6 p-2 bg-gray-100 rounded-full hover:bg-brand-gold hover:text-brand-brown transition-colors z-10"
         >
           <X className="h-6 w-6" />
         </button>
@@ -52,7 +52,7 @@ const MentionsLegales: React.FC<MentionsLegalesProps> = ({ isOpen, onClose }) =>
             trackXProps={{ style: { display: 'none' } }}
           >
 
-        <div className="p-2 sm:p-4 md:p-6 lg:p-8">
+        <div className="pt-16 p-2 sm:p-4 md:p-6 lg:p-8">
           <h3 className="text-2xl sm:text-3xl font-block font-bold text-brand-green mb-4 sm:mb-6 text-center tracking-tight">{mentionsData.mentions_label}</h3>
           
             <div className="prose prose-base sm:prose-lg max-w-none text-brand-brown leading-relaxed space-y-4 sm:space-y-6 pr-1 sm:pr-3">

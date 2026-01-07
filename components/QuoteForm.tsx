@@ -151,7 +151,7 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
             }}
             trackXProps={{ style: { display: 'none' } }}
             >
-            <div className="p-8">
+            <div className="pt-16 p-8">
               {submitted ? (
                 <div className="text-center py-10">
                   <div className="w-20 h-20 bg-brand-green rounded-full flex items-center justify-center mx-auto mb-6">
@@ -189,7 +189,7 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                 </div>
               ) : (
                 <>
-                  <h3 className="text-2xl font-block font-bold text-brand-green mb-2 pr-10">Demander un devis</h3>
+                  <h3 className="text-2xl font-block font-bold text-brand-green mb-2 text-center">Demander un devis</h3>
                   <p className="text-brand-brown/70 mb-8">
                     Sélectionnez vos prestations et expliquez votre besoin. Je vous réponds rapidement.
                   </p>
