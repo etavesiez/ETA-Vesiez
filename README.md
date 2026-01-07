@@ -113,4 +113,22 @@ Tu peux ainsi réorganiser les catégories simplement en changeant le numéro au
 
 ---
 
+
+---
+
+## 6. Image og-image.png (aperçu du lien partagé)
+
+Le fichier `og-image.png` (placé dans `public/images/`) est l'image utilisée comme vignette d'aperçu lorsque tu partages le site sur les réseaux sociaux (Facebook, LinkedIn, etc.) ou dans les messageries (WhatsApp, Messenger...).
+
+- **À quoi ça sert ?**
+  - C'est l'image qui s'affiche automatiquement à côté du titre et de la description du site quand tu colles le lien.
+  - Elle permet d'avoir un aperçu visuel professionnel et reconnaissable.
+- **Comment la changer ?**
+  - Remplace le fichier `og-image.png` dans `public/images/` par une nouvelle image (format PNG, idéalement 1200x630px pour un affichage optimal).
+  - Garde le même nom de fichier pour que l'aperçu fonctionne sans modifier le code.
+- **Astuce :**
+  - Après modification, il peut être nécessaire d'attendre ou d'utiliser un "debugger" Facebook pour voir la nouvelle image (les réseaux sociaux gardent parfois l'ancienne en cache).
+
+---
+
 **Ce guide est fait pour que tu puisses gérer le contenu du site sans coder !**
