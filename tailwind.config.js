@@ -13,7 +13,6 @@ export default {
           brown: '#4D3529', // Marron foncé
           cream: '#F7F4E0', // Crème clair
         }
-      }
       },
       fontFamily: {
         sans: ['Avenir Next', 'Inter', 'sans-serif'],
@@ -31,7 +30,7 @@ export default {
           'Arial Black',
           'sans-serif',
         ],
-      }
+      },
     },
   },
   plugins: [],
