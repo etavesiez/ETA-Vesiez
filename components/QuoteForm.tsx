@@ -175,7 +175,17 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                   </div>
                   <h3 className="text-2xl font-block font-bold text-brand-green mb-4">Demande envoyée !</h3>
                   <p className="text-brand-brown mb-8">
-                    Merci M/Mme {formData.name}. Louis Vésiez a bien reçu votre demande de devis.<br/>
+                    {(() => {
+                      // Cherche le champ texte obligatoire qui sert de nom
+                      const nameField = fields.find(
+                        (f) => (f.type === 'text' || f.type === 'input') && (f.obligatoire || f.required)
+                      );
+                      const nameValue = nameField ? formData[nameField.champ] : '';
+                      return nameValue && nameValue.trim() !== ''
+                        ? `Merci M./Mme ${nameValue}, Louis Vésiez a bien reçu votre demande de devis.`
+                        : 'Merci M./Mme, Louis Vésiez a bien reçu votre demande de devis.';
+                    })()}
+                    <br/>
                     Il vous recontactera très prochainement par {contactMethod === 'email' ? 'email' : 'téléphone'}.
                   </p>
                   <div className="flex justify-center gap-4">
@@ -283,6 +293,7 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                           );
                         }
                         // Champ text classique
+                        // Champ text classique
                         return (
                           <div key={field.champ}>
                             <label htmlFor={field.champ} className="block text-sm font-bold text-brand-green mb-2 uppercase tracking-wide">
@@ -290,7 +301,7 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                             </label>
                             <input
                               type={field.type}
-                              required={!!field.obligatoire}
+                              required={field.champ === 'name' ? true : !!field.obligatoire}
                               placeholder={field.placeholder}
                               className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none"
                               value={formData[field.champ] || ''}
