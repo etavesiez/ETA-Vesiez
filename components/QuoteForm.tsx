@@ -74,7 +74,7 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
     const formDataToSend = new FormData();
     Object.entries({ ...formData, preferredContact: contactMethod }).forEach(([key, value]) => {
       if (Array.isArray(value)) {
-        formDataToSend.append(key, value.join(', '));
+        formDataToSend.append(key, (value as unknown[]).map(v => String(v)).join(', '));
       } else {
         formDataToSend.append(key, value !== undefined && value !== null ? String(value) : '');
       }
