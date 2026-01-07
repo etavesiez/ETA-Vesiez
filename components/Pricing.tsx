@@ -28,9 +28,9 @@ const Pricing: React.FC<PricingProps> = ({ openQuoteModal }) => {
           <table className="w-full text-left">
             <thead className="bg-brand-green text-brand-cream">
               <tr>
-                <th className="p-6 font-serif text-lg">Prestation</th>
-                <th className="p-6 font-serif text-lg hidden sm:table-cell">Unité</th>
-                <th className="p-6 font-serif text-lg text-right">Prix</th>
+                <th className="p-6 font-block text-lg">Prestation</th>
+                <th className="p-6 font-block text-lg hidden sm:table-cell">Unité</th>
+                <th className="p-6 font-block text-lg text-right">Prix</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-brand-cream">
