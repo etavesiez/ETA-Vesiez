@@ -28,11 +28,8 @@ const MentionsLegales: React.FC<MentionsLegalesProps> = ({ isOpen, onClose }) =>
         >
           <X className="h-6 w-6" />
         </button>
-
-        <div className="p-6 sm:p-5">
-          <h3 className="text-2xl sm:text-3xl font-block font-bold text-brand-green mb-4 sm:mb-6 text-center tracking-tight">{mentionsData.mentions_label}</h3>
-          <Scrollbar
-            style={{ maxHeight: '100vh', minHeight: 500 }}
+        <Scrollbar
+            style={{ maxHeight: '100vh', minHeight: 800 }}
             trackYProps={{ style: { background: 'transparent', width: 10, right: 0 } }}
             thumbYProps={{
               style: { background: '#4D3529', borderRadius: 6, width: 8, minHeight: 40, transition: 'background 0.2s' },
@@ -40,6 +37,10 @@ const MentionsLegales: React.FC<MentionsLegalesProps> = ({ isOpen, onClose }) =>
             }}
             trackXProps={{ style: { display: 'none' } }}
           >
+
+        <div className="p-6 sm:p-5">
+          <h3 className="text-2xl sm:text-3xl font-block font-bold text-brand-green mb-4 sm:mb-6 text-center tracking-tight">{mentionsData.mentions_label}</h3>
+          
             <div className="prose prose-base sm:prose-lg max-w-none text-brand-brown leading-relaxed space-y-4 sm:space-y-6 pr-1 sm:pr-3">
               {mentionsData.contenu.map((item: { titre?: string, texte: string }, idx: number) => {
                 if (item.titre === 'Adresse :') {
@@ -82,8 +83,9 @@ const MentionsLegales: React.FC<MentionsLegalesProps> = ({ isOpen, onClose }) =>
                 );
               })}
             </div>
-          </Scrollbar>
+          
         </div>
+        </Scrollbar>
       </div>
     </div>
   );
