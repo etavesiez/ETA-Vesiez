@@ -13,45 +13,44 @@ const Services: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Générer automatiquement le carrousel depuis les dossiers
-  const carouselImages = Object.entries(imageModules)
-    .map(([path, module]) => {
-      const url = module.default;
-      
-      // Extraire le nom du dossier (catégorie)
-      const pathParts = path.split('/');
-      const categoryFolder = pathParts[pathParts.length - 2]; // Dossier parent
-      
-      // Extraire le nom du fichier sans extension
-      const fileName = pathParts[pathParts.length - 1]
-        .replace(/\.(jpg|jpeg|png|webp)$/i, '');
-      
-      // Formater le titre : remplacer tirets par espaces et capitaliser
-      const formattedTitle = fileName
-        .split('-')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-      
-      // Formater automatiquement le nom du dossier : tirets → espaces, capitaliser chaque mot
-      const category = categoryFolder
-        .split('-')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-      
-      console.log('Image loaded:', { path, url, category, title: formattedTitle });
-      
-      return {
-        src: url,
-        title: formattedTitle,
-        category: category
-      };
-    })
-    .sort((a, b) => {
-      // Trier par catégorie puis par titre
-      if (a.category !== b.category) {
-        return a.category.localeCompare(b.category);
-      }
-      return a.title.localeCompare(b.title);
-    });
+    const carouselImages = Object.entries(imageModules)
+      .map(([path, module]) => {
+        const url = module.default;
+        const pathParts = path.split('/');
+        const categoryFolder = pathParts[pathParts.length - 2];
+        // Extraire le numéro de tri éventuel (ex: 01-...)
+        const match = categoryFolder.match(/^(\d+)-(.+)$/);
+        const sortOrder = match ? parseInt(match[1], 10) : 999;
+        const categoryNameClean = match ? match[2] : categoryFolder;
+        // Formater le nom de catégorie pour affichage
+        const category = categoryNameClean
+          .split('-')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+        // Formater le titre de l'image
+        const fileName = pathParts[pathParts.length - 1]
+          .replace(/\.(jpg|jpeg|png|webp)$/i, '');
+        const formattedTitle = fileName
+          .split('-')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+        return {
+          src: url,
+          title: formattedTitle,
+          category,
+          sortOrder,
+        };
+      })
+      .sort((a, b) => {
+        // Trier d'abord par numéro, puis par nom de catégorie, puis par titre
+        if (a.sortOrder !== b.sortOrder) {
+          return a.sortOrder - b.sortOrder;
+        }
+        if (a.category !== b.category) {
+          return a.category.localeCompare(b.category);
+        }
+        return a.title.localeCompare(b.title);
+      });
 
   console.log('Total images in carousel:', carouselImages.length);
 
