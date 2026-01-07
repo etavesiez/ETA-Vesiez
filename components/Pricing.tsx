@@ -15,10 +15,10 @@ const Pricing: React.FC<PricingProps> = ({ openQuoteModal }) => {
   return (
     <section className="py-24 bg-brand-cream">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <h2 className="text-4xl font-block font-bold text-brand-green mb-4">Tarifs</h2>
           <div className="h-1 w-20 bg-brand-gold mx-auto rounded-full"></div>
-          <div className="text-brand-brown/70 text-lg mb-4 mt-4">Pour assurer un tarif adapté à chaque chantier, toutes nos prestations sont uniquement sur devis personnalisé.</div>
+          <div className="text-brand-brown/70 text-lg mt-4">Pour assurer un tarif adapté à chaque chantier, toutes nos prestations sont uniquement sur devis personnalisé.</div>
         </div>
 
         <div className="bg-white rounded-2xl overflow-hidden shadow-sm">
@@ -40,7 +40,7 @@ const Pricing: React.FC<PricingProps> = ({ openQuoteModal }) => {
           </table>
         </div>
         
-        <div className="mt-5 text-center">
+        <div className="mt-10 text-center">
              <button 
                onClick={openQuoteModal}
                className="inline-flex items-center gap-2 px-8 py-3 bg-brand-gold text-brand-brown font-bold rounded-full transition-colors hover:bg-opacity-90 shadow-lg"
