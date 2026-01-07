@@ -36,8 +36,11 @@ const Pricing: React.FC<PricingProps> = ({ openQuoteModal }) => {
             <tbody className="divide-y divide-brand-cream">
               {prices.map((item, index) => (
                 <tr key={index} className="hover:bg-gray-50 transition-colors">
-                  <td className="p-6 text-brand-brown font-medium">{item.service}</td>
-                  <td className="p-6 text-gray-500 hidden sm:table-cell">{item.unit}</td>
+                  <td className="p-6 text-brand-brown font-medium align-top">
+                    <div>{item.service}</div>
+                    <div className="sm:hidden text-xs text-gray-500 mt-1">{item.unit}</div>
+                  </td>
+                  <td className="p-6 text-gray-500 hidden sm:table-cell align-top">{item.unit}</td>
                 </tr>
               ))}
             </tbody>
