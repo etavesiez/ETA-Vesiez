@@ -68,60 +68,35 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
   };
 
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Envoi via Formsubmit.co
-    const form = document.createElement('form');
-    form.action = contactEmail ? `https://formsubmit.co/${contactEmail}` : '';
-    form.method = 'POST';
-    form.style.display = 'none';
-
-    // Ajoute tous les champs dynamiquement
-    (Object.entries({ ...formData, preferredContact: contactMethod }) as [string, unknown][]).forEach(([key, value]) => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
+    // Envoi via fetch à Formsubmit.co sans rechargement
+    const formDataToSend = new FormData();
+    Object.entries({ ...formData, preferredContact: contactMethod }).forEach(([key, value]) => {
       if (Array.isArray(value)) {
-        input.value = value.join(', ');
+        formDataToSend.append(key, value.join(', '));
       } else {
-        input.value = value !== undefined && value !== null ? String(value) : '';
+        formDataToSend.append(key, value !== undefined && value !== null ? String(value) : '');
       }
-      form.appendChild(input);
     });
-
-    // Ajoute _replyto si le champ email existe dans le formulaire
     if (formData.email) {
-      const replyto = document.createElement('input');
-      replyto.type = 'hidden';
-      replyto.name = '_replyto';
-      replyto.value = formData.email;
-      form.appendChild(replyto);
+      formDataToSend.append('_replyto', formData.email);
     }
+    formDataToSend.append('_subject', 'Nouvelle demande de devis ETA Vesiez');
+    formDataToSend.append('_captcha', 'false');
+    // Pas de _next pour éviter la redirection
 
-    // Ajoute _subject
-    const subject = document.createElement('input');
-    subject.type = 'hidden';
-    subject.name = '_subject';
-    subject.value = 'Nouvelle demande de devis ETA Vesiez';
-    form.appendChild(subject);
-
-    // Désactive le captcha
-    const captcha = document.createElement('input');
-    captcha.type = 'hidden';
-    captcha.name = '_captcha';
-    captcha.value = 'false';
-    form.appendChild(captcha);
-
-    // Redirection après soumission (reste sur la page)
-    const next = document.createElement('input');
-    next.type = 'hidden';
-    next.name = '_next';
-    next.value = window.location.href;
-    form.appendChild(next);
-
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
+    try {
+      await fetch(`https://formsubmit.co/${contactEmail}`, {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json',
+        },
+      });
+    } catch (err) {
+      // Optionnel : afficher une erreur
+    }
     setSubmitted(true);
   };
 
@@ -263,26 +238,31 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                       if (field.type === 'email' || field.type === 'tel' || field.type === 'text') {
                         // Pour email/tel, on propose le choix du mode de contact si champ email ou tel
                         if (field.type === 'email' || field.type === 'tel') {
+                          const isEmail = field.type === 'email';
+                          const isPhone = field.type === 'tel';
                           return (
                             <div key={field.champ}>
                               <div className="flex items-center gap-2 mb-2">
                                 <input
                                   type="radio"
                                   name="contactMethod"
-                                  checked={contactMethod === field.type.replace('email', 'email').replace('tel', 'phone')}
-                                  onChange={() => setContactMethod(field.type === 'email' ? 'email' : 'phone')}
+                                  checked={contactMethod === (isEmail ? 'email' : 'phone')}
+                                  onChange={() => setContactMethod(isEmail ? 'email' : 'phone')}
                                   className="accent-brand-gold"
                                 />
                                 <span className="text-xs text-brand-brown font-medium cursor-pointer">
-                                  {field.type === 'email' ? 'Par Email' : 'Par Téléphone'}
+                                  {isEmail ? 'Par Email' : 'Par Téléphone'}
                                 </span>
                               </div>
                               <input
                                 type={field.type}
-                                required={contactMethod === (field.type === 'email' ? 'email' : 'phone') && !!field.obligatoire}
+                                required={
+                                  (isEmail && contactMethod === 'email') ||
+                                  (isPhone && contactMethod === 'phone')
+                                }
                                 placeholder={field.placeholder}
                                 className={`w-full px-4 py-3 rounded-lg border focus:ring-1 outline-none transition-colors ${
-                                  contactMethod === (field.type === 'email' ? 'email' : 'phone')
+                                  contactMethod === (isEmail ? 'email' : 'phone')
                                     ? 'border-brand-green bg-white ring-brand-green'
                                     : 'border-gray-200 bg-gray-50'
                                 }`}
