@@ -1,6 +1,8 @@
 import React from 'react';
 import { SocialIcon } from 'react-social-icons';
 import footerData from '../public/texte/footer.json';
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
+import mentionsData from '../public/texte/mentions-legales.json';
 
 const Footer: React.FC = () => {
   return (
@@ -79,7 +81,26 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-10 mb-2">
-          <a href={footerData.mentions_lien} className="hover:text-white transition-colors text-sm opacity-80">{footerData.mentions}</a>
+          <Dialog>
+            <DialogTrigger asChild>
+              <button
+                className="hover:text-white transition-colors text-sm opacity-80 underline focus:outline-none focus:ring-2 focus:ring-brand-gold rounded"
+                type="button"
+              >
+                {footerData.mentions}
+              </button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle className="text-brand-green text-2xl mb-4 text-center">{mentionsData.mentions_label}</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4 text-brand-brown text-base max-h-[60vh] overflow-y-auto px-1">
+                {mentionsData.contenu.map((paragraphe: string, idx: number) => (
+                  <p key={idx}>{paragraphe}</p>
+                ))}
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
         <div className="text-xs opacity-50 text-center">
           {footerData.texte}
