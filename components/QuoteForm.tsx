@@ -28,7 +28,7 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState<any>({});
 
   useEffect(() => {
-    fetch('/texte/devis.json')
+    fetch(`${import.meta.env.BASE_URL}texte/devis.json`)
       .then(res => res.json())
       .then((data) => {
         setFields(data);
