@@ -12,8 +12,8 @@ const Footer: React.FC = () => {
           style={{ maxWidth: 180 }}
         />
         <div className="flex flex-col items-center mb-6">
-          <span className="uppercase tracking-widest text-brand-gold font-bold text-sm mb-2">Réseaux sociaux</span>
-          <div className="flex flex-row items-center gap-6">
+          <span className="uppercase tracking-widest text-brand-gold font-block text-lg mb-2">Réseaux sociaux</span>
+          <div className="flex flex-row items-center gap-6 font-sans">
             <SocialIcon
               url="https://www.instagram.com/eta_vesiez"
               target="_blank"

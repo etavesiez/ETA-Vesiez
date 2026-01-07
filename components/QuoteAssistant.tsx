@@ -29,7 +29,7 @@ const QuoteAssistant: React.FC = () => {
     <div className="bg-white p-6 rounded-xl shadow-lg border border-brand-gold/30 mt-8">
       <div className="flex items-center gap-2 mb-4">
         <Sparkles className="h-5 w-5 text-brand-gold" />
-        <h3 className="text-lg font-bold text-brand-green">Assistant de Rédaction Intelligent</h3>
+        <h3 className="text-lg font-block font-bold text-brand-green">Assistant de Rédaction Intelligent</h3>
       </div>
       <p className="text-sm text-gray-600 mb-4">
         Décrivez votre besoin simplement (ex: "Je veux planter 10 hectares de patates semaine prochaine"), et notre assistant rédigera un email professionnel pour vous.

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Sprout, Truck, Hammer, Tractor, ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Import automatique de toutes les images depuis public/images/**/
@@ -53,19 +53,32 @@ const Services: React.FC = () => {
 
   console.log('Total images in carousel:', carouselImages.length);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Fonction pour démarrer ou redémarrer le timer
+  const startTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
-    }, 5000);
-    return () => clearInterval(timer);
+    }, 7000); // défilement toutes les 7 secondes
+  };
+
+  useEffect(() => {
+    startTimer();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [carouselImages.length]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    startTimer();
   };
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+    startTimer();
   };
 
   const services = [
@@ -120,7 +133,7 @@ const Services: React.FC = () => {
     <section className="py-24 bg-brand-cream">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-serif font-bold text-brand-green mb-4">Les Prestations</h2>
+          <h2 className="text-4xl font-block font-bold text-brand-green mb-4">Les Prestations</h2>
           <div className="h-1 w-20 bg-brand-gold mx-auto rounded-full"></div>
         </div>
 
@@ -144,7 +157,7 @@ const Services: React.FC = () => {
                   <span className="inline-block px-3 py-1 bg-brand-gold text-brand-brown rounded-full text-sm font-semibold mb-2">
                     {image.category}
                   </span>
-                  <h3 className="text-3xl font-bold">{image.title}</h3>
+                  <h3 className="text-3xl font-block font-bold">{image.title}</h3>
                 </div>
               </div>
             ))}
@@ -189,7 +202,7 @@ const Services: React.FC = () => {
               <div className="w-16 h-16 rounded-full bg-brand-cream flex items-center justify-center mb-6 text-brand-green">
                 <service.icon className="h-8 w-8" />
               </div>
-              <h3 className="text-xl font-bold text-brand-green mb-3">{service.title}</h3>
+              <h3 className="text-xl font-block font-bold text-brand-green mb-3">{service.title}</h3>
               <p className="text-brand-brown/80 leading-relaxed">
                 {service.desc}
               </p>

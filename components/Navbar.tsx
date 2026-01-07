@@ -101,7 +101,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, openQuoteModal }) => {
               <button
                 key={item.label}
                 onClick={() => handleNavClick(item.id)}
-                className="text-2xl font-serif font-bold text-brand-green hover:text-brand-gold"
+                className="text-2xl font-block font-bold text-brand-green hover:text-brand-gold"
               >
                 {item.label}
               </button>

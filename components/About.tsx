@@ -15,8 +15,8 @@ const About: React.FC = () => {
           </div>
           
           <div className="w-full lg:w-1/2">
-            <h4 className="text-brand-gold font-bold uppercase tracking-widest text-sm mb-2">L'Entrepreneur</h4>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-brand-green mb-8">
+            <h4 className="text-brand-gold font-block uppercase tracking-widest text-sm mb-2">L'Entrepreneur</h4>
+            <h2 className="text-4xl md:text-5xl font-block font-bold text-brand-green mb-8">
               Un service de proximité par Louis Vésiez
             </h2>
             
@@ -32,11 +32,11 @@ const About: React.FC = () => {
             <div className="mt-8 pt-8 border-t border-brand-cream grid grid-cols-2 gap-8">
                <div>
                   <span className="block text-3xl font-bold text-brand-gold mb-1">Lucheux</span>
-                  <span className="text-sm text-gray-500">Localisation</span>
+                  <span className="text-sm text-gray-500 font-sans">Localisation</span>
                </div>
                <div>
                   <span className="block text-3xl font-bold text-brand-gold mb-1">EI</span>
-                  <span className="text-sm text-gray-500">Statut Juridique</span>
+                  <span className="text-sm text-gray-500 font-sans">Statut Juridique</span>
                </div>
             </div>
           </div>

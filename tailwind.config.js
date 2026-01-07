@@ -15,8 +15,21 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Avenir Next', 'Inter', 'sans-serif'],
         serif: ['Merriweather', 'serif'],
+        block: [
+          'League Spartan',
+          'Berthold Block',
+          'Bebas Neue',
+          'BBH Bogle',
+          'Montserrat',
+          'Archivo Black',
+          'Oswald',
+          'Anton',
+          'Impact',
+          'Arial Black',
+          'sans-serif',
+        ],
       }
     },
   },

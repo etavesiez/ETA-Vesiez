@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaGoogle } from 'react-icons/fa';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 // import { SocialIcon } from 'react-social-icons';
 
@@ -32,8 +33,8 @@ const HorairesMessage: React.FC = () => {
         
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-brand-green mb-6">Me Contacter</h2>
-          <p className="text-brand-brown/70 text-lg max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-block font-bold text-brand-green mb-6">Me Contacter</h2>
+          <p className="text-brand-brown/70 text-lg max-w-2xl mx-auto font-sans">
             Besoin d'un renseignement direct ? Je suis à votre écoute.
           </p>
         </div>
@@ -45,7 +46,7 @@ const HorairesMessage: React.FC = () => {
                   <MapPin className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg text-brand-green mb-2">Adresse</h3>
+                  <h3 className="font-block text-xl font-bold text-brand-green mb-2">Adresse</h3>
                   <a
                     href="https://www.google.com/maps/search/?api=1&query=10+Rue+Wallon+80600+Lucheux"
                     target="_blank"
@@ -62,7 +63,7 @@ const HorairesMessage: React.FC = () => {
                   <Phone className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg text-brand-green mb-2">Téléphone</h3>
+                  <h3 className="font-block text-xl font-bold text-brand-green mb-2">Téléphone</h3>
                   <a
                     href="tel:+33769651430"
                     className="text-brand-brown hover:text-brand-gold font-bold text-base transition-colors underline"
@@ -77,7 +78,7 @@ const HorairesMessage: React.FC = () => {
                   <Mail className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg text-brand-green mb-2">Email</h3>
+                  <h3 className="font-block text-xl font-bold text-brand-green mb-2">Email</h3>
                   <a
                     href="mailto:eta-vesiez@gmail.com"
                     className="text-brand-brown hover:text-brand-gold font-bold text-base transition-colors underline break-all"
@@ -92,22 +93,23 @@ const HorairesMessage: React.FC = () => {
                   <Clock className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg text-brand-green mb-2">Horaires</h3>
+                  <h3 className="font-block text-xl font-bold text-brand-green mb-2">Horaires</h3>
                   <HorairesMessage />
-                  <p className="text-brand-brown">Lundi - Samedi</p>
-                  <p className="text-brand-brown font-bold">8h00 - 19h00</p>
+                  <p className="text-brand-brown font-sans">Lundi - Samedi</p>
+                  <p className="text-brand-brown font-bold font-sans">8h00 - 19h00</p>
                 </div>
             </div>
         </div>
 
         <div className="text-center pt-16">
             <a 
-                href="https://www.google.com/maps" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-brand-green font-bold border-b-2 border-brand-green hover:text-brand-gold hover:border-brand-gold transition-colors pb-1 text-lg"
+              href="https://www.google.com/maps" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-brand-green font-bold border-b-2 border-brand-green hover:text-brand-gold hover:border-brand-gold transition-colors pb-1 text-lg"
             >
-                Laisser un avis sur Google
+              <FaGoogle className="h-6 w-6 inline-block" aria-label="Google logo" />
+              Laisser un avis sur Google
             </a>
         </div>
 

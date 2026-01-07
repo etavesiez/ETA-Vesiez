@@ -32,7 +32,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection, openQuoteModal }) => {
           className="mx-auto mb-6 max-w-[600px] w-full drop-shadow-lg"
         />
         
-        <p className="text-xl md:text-2xl text-brand-cream/90 font-light mb-12 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xl md:text-2xl text-brand-cream/90 font-light mb-12 max-w-2xl mx-auto leading-relaxed font-sans">
           Prestation de service dans les haut de France
         </p>
         

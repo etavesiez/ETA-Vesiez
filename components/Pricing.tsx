@@ -18,7 +18,7 @@ const Pricing: React.FC<PricingProps> = ({ openQuoteModal }) => {
     <section className="py-24 bg-brand-cream">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-serif font-bold text-brand-green mb-4">Tarifs</h2>
+          <h2 className="text-4xl font-block font-bold text-brand-green mb-4">Tarifs</h2>
           <p className="text-brand-brown/70">
             Une tarification claire et adaptée à vos chantiers.
           </p>

@@ -1,0 +1,27 @@
+/* Berthold Block (variable fallback) */
+@font-face {
+  font-family: 'Berthold Block';
+  src: url('/fonts/BertholdBlock.woff2') format('woff2'),
+       url('/fonts/BertholdBlock.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Avenir Next (variable fallback) */
+@font-face {
+  font-family: 'Avenir Next';
+  src: url('/fonts/AvenirNext-Regular.woff2') format('woff2'),
+       url('/fonts/AvenirNext-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Avenir Next';
+  src: url('/fonts/AvenirNext-Bold.woff2') format('woff2'),
+       url('/fonts/AvenirNext-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
