@@ -42,9 +42,28 @@ Chaque bloc correspond à une prestation :
 
 Les images du carrousel sont dans `public/images/carrousel/` (plusieurs sous-dossiers par catégorie).
 
+
+### Astuce : Choisir l'ordre des catégories du carrousel
+Pour choisir l'ordre d'affichage des catégories dans le carrousel, commence le nom de chaque dossier par un chiffre et un tiret, par exemple :
+
+```
+public/images/carrousel/
+  01-plantation/
+  02-arrachage/
+  03-preparation/
+  04-fourrage/
+  05-entretien/
+```
+
+Le chiffre fixe l'ordre d'apparition sur le site, mais il ne sera pas affiché (le nom visible sera "Plantation", "Arrachage"...).
+
+Tu peux ainsi réorganiser les catégories simplement en changeant le numéro au début du nom du dossier.
+
+---
+
 ### Ajouter une photo
 1. Nomme-la avec des tirets (ex : `semis-printemps-2025.jpg`)
-2. Mets-la dans le bon dossier (ex : `public/images/plantation/`)
+2. Mets-la dans le bon dossier (ex : `public/images/01-plantation/`)
 3. Publie (push sur GitHub)
 
 ### Supprimer une photo
