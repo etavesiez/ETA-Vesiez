@@ -20,7 +20,7 @@ const MentionsLegales: React.FC<MentionsLegalesProps> = ({ isOpen, onClose }) =>
       ></div>
 
       {/* Modal Content */}
-      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in duration-200">
+      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl min-h-[60vh]  overflow-y-auto animate-in fade-in zoom-in duration-200">
         {/* Close Button */}
         <button 
           onClick={onClose}
@@ -29,10 +29,10 @@ const MentionsLegales: React.FC<MentionsLegalesProps> = ({ isOpen, onClose }) =>
           <X className="h-6 w-6" />
         </button>
 
-        <div className="p-6 sm:p-10">
+        <div className="p-6 sm:p-5">
           <h3 className="text-2xl sm:text-3xl font-block font-bold text-brand-green mb-4 sm:mb-6 text-center tracking-tight">{mentionsData.mentions_label}</h3>
           <Scrollbar
-            style={{ maxHeight: '60vh', minHeight: 200 }}
+            style={{ maxHeight: '100vh', minHeight: 500 }}
             trackYProps={{ style: { background: 'transparent', width: 10, right: 0 } }}
             thumbYProps={{
               style: { background: '#4D3529', borderRadius: 6, width: 8, minHeight: 40, transition: 'background 0.2s' },
